@@ -1,0 +1,62 @@
+:root {
+	--hover-menu: rgba(22, 24, 35, 0.03);
+}
+
+[data-theme='dark'] {
+	--hover-menu: rgb(32 32 32);
+}
+
+.typpy-menu {
+	font-weight: 600;
+	background-color: rgba(255, 255, 255, 0.08);
+	.menu-wrapper {
+		padding-top: 5px;
+		padding-bottom: 5px;
+		.menu-title {
+			position: fixed;
+			display: flex;
+			align-items: center;
+			width: 100%;
+			height: 50px;
+			color: var(--default-text-color);
+
+			span {
+				height: 25px;
+				margin-left: 15px;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+			.title {
+				margin-left: 32px;
+			}
+		}
+		.menu-content {
+			.menu-slot {
+				color: var(--default-text-color);
+				display: flex;
+				padding: 10px 10px 14px 17px;
+				justify-content: space-between;
+				img {
+					height: 20px;
+				}
+				.menu-name {
+					flex: 1;
+					margin-left: 6px;
+				}
+
+				&:hover {
+					cursor: pointer;
+					background: var(--hover-menu);
+				}
+			}
+		}
+
+		.menu-title + .menu-content {
+			margin-top: 50px;
+		}
+	}
+	.menu-children {
+		padding-bottom: 0;
+	}
+}

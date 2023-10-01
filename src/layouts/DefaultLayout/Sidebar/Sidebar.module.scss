@@ -1,0 +1,109 @@
+:root {
+	--hover-nav: rgba(22, 24, 35, 0.03);
+	--login-border-bottom: rgba(22, 24, 35, 0.12);
+	--login-border-top: solid 1px var(--login-border-bottom);
+	--login-box-color: white;
+	--hover-login-box-color: rgba(254, 44, 85, 0.06);
+}
+
+[data-theme='dark'] {
+	--hover-nav: rgba(255, 255, 255, 0.08);
+	--login-border-bottom: rgba(255, 255, 255, 0.12);
+	--login-border-top: none;
+	--login-box-color: rgba(255, 255, 255, 0.08);
+	--hover-login-box-color: rgba(254, 44, 85, 0.06);
+}
+
+.wrapper {
+	background-color: var(--default-background-color);
+	position: fixed;
+	width: var(--side-bar-width);
+	padding-top: 20px;
+	padding-left: 8px;
+	.nav-container {
+		margin-bottom: 12px;
+		height: 191px;
+
+		.slot-container {
+			color: var(--default-text-color);
+			font-size: 18px;
+			display: flex;
+			align-items: center;
+			justify-content: left;
+			padding: 8px 8px 5px 8px;
+			font-family: 'IBM Plex Sans', TikTokFont, Arial, Tahoma, PingFangSC, sans-serif;
+			font-weight: 900;
+			font-size: 16px;
+			.title {
+				margin-left: 8px;
+			}
+			.icon {
+				width: 32px;
+			}
+			&:hover {
+				background: var(--hover-nav);
+			}
+		}
+		.active {
+			color: var(--primary);
+		}
+	}
+	.login-box {
+		border-top: var(--login-border-top);
+		border-bottom: solid 1px var(--login-border-bottom);
+		border-left: none;
+		border-right: none;
+		padding: 20px 8px 24px;
+
+		.comment {
+			text-align: justify;
+			color: var(--description-color);
+			font-size: 16px;
+			line-height: 21px;
+		}
+
+		.login {
+			margin-top: 18px;
+			background-color: var(--login-box-color);
+			border: solid 1px var(--primary);
+			color: var(--primary);
+			font-weight: 600;
+			font-size: 17px;
+			width: 100%;
+			border-radius: 4px;
+			height: 48px;
+		}
+		.login:hover {
+			cursor: pointer;
+			background-color: var(--hover-login-box-color);
+		}
+
+		.placeholder {
+			height: 149px;
+		}
+	}
+
+	.footer {
+		padding-top: 16px;
+		padding-left: 8px;
+
+		a {
+			text-decoration: none;
+			color: var(--description-color);
+			font-weight: 600;
+			font-size: 12px;
+			line-height: 16px;
+			margin-top: 5px;
+			margin-right: 6px;
+		}
+		a:hover {
+			cursor: pointer;
+			text-decoration: underline;
+		}
+
+		.footer-link {
+			margin-bottom: 10px;
+			line-height: 1.4;
+		}
+	}
+}

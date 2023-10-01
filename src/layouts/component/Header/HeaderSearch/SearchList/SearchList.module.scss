@@ -1,0 +1,63 @@
+:root {
+	--typpy-text-color: rgba(22, 24, 35, 0.5);
+	--hover-list: rgba(22, 24, 35, 0.03);
+}
+
+[data-theme='dark'] {
+	--typpy-text-color: #8a8a8a;
+	--hover-list: #2f2f2f;
+}
+
+.typpy-wrapper {
+	width: var(--default-header-search-width);
+	height: 100%;
+	.account-search {
+		font-weight: 600;
+		color: var(--typpy-text-color);
+		padding: 5px 12px;
+		font-size: 14px;
+	}
+	.account-container {
+		.account-slot {
+			display: flex;
+			padding: 10px 16px;
+			img {
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				object-fit: cover;
+			}
+
+			.info {
+				margin-left: 8px;
+
+				.info-name {
+					h4 {
+						color: var(--default-text-color);
+						display: inline-block;
+					}
+
+					.check {
+						margin-left: 6px;
+						color: rgb(32, 213, 236);
+					}
+				}
+
+				.info-username {
+					display: block;
+					font-size: 14px;
+					color: var(--typpy-text-color);
+					font-weight: 400;
+				}
+			}
+			&:hover {
+				cursor: pointer;
+				background: var(--hover-list);
+			}
+		}
+	}
+}
+
+.none {
+	display: none;
+}

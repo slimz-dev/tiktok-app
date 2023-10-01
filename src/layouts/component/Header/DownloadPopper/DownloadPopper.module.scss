@@ -1,0 +1,69 @@
+:root {
+	--downloadpopper-wrapper: white;
+}
+
+[data-theme='dark'] {
+	--downloadpopper-wrapper: rgba(255, 255, 255, 0.08);
+}
+
+.wrapper {
+	background: var(--downloadpopper-wrapper);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.header {
+	margin-top: 8px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	.header-icon {
+		width: 116px;
+		height: 110px;
+		color: var(--default-text-color);
+	}
+	.title {
+		color: var(--default-text-color);
+		width: 70%;
+		text-align: center;
+		font-weight: 600;
+		font-size: 16px;
+		letter-spacing: 0.093px;
+		margin-top: 8px;
+		margin-bottom: 8px;
+	}
+}
+
+.download {
+	background-color: var(--primary);
+	color: white;
+	font-weight: 600;
+	font-size: 14px;
+	border-radius: 6px;
+	padding: 18px 76px;
+	&:hover {
+		cursor: pointer;
+		background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)),
+			rgb(254, 44, 85);
+	}
+}
+
+.footer {
+	margin-top: 14px;
+	margin-bottom: 14px;
+	width: 70%;
+	text-align: center;
+	color: var(--description-color);
+	font-size: 12px;
+	position: relative;
+	.footer-icon {
+		position: absolute;
+		right: -12px;
+		top: 8px;
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+}

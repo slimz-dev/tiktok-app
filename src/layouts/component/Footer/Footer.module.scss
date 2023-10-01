@@ -1,0 +1,39 @@
+.footer {
+	background-color: rgb(0, 0, 0);
+	border-top: 1px solid rgb(151, 151, 151);
+}
+
+//Link
+.link {
+	display: flex;
+	justify-content: space-evenly;
+	padding-top: 46px;
+	margin-bottom: 46px;
+
+	li {
+		padding-top: 7px;
+	}
+	a {
+		color: rgba(255, 255, 255, 0.75) !important;
+
+		&:hover {
+			border-bottom: 2px solid rgba(255, 255, 255, 0.75);
+		}
+	}
+}
+
+.link-title {
+	color: white;
+}
+.footer-other {
+	display: flex;
+	justify-content: space-between;
+
+	padding: 0px 50px 34px 152px;
+
+	.copyright {
+		color: rgba(255, 255, 255, 0.75);
+		font-weight: 700;
+		font-size: 14px;
+	}
+}
