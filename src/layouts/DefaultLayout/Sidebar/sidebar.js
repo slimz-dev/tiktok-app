@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './Sidebar.module.scss';
 
-import { HomeIcon, Contact, Live, Explore } from '~/Icons';
+import { Icon } from '~/Icons';
 import config from '~/config';
 const cx = classNames.bind(styles);
 function Sidebar() {
@@ -17,7 +17,7 @@ function Sidebar() {
 						})
 					}
 				>
-					<HomeIcon />
+					<Icon.HomeIcon />
 					<span className={cx('title')}>Dành cho bạn</span>
 				</NavLink>
 				<NavLink
@@ -28,7 +28,7 @@ function Sidebar() {
 						})
 					}
 				>
-					<Contact />
+					<Icon.Contact />
 					<span className={cx('title')}>Đang Follow</span>
 				</NavLink>
 				<NavLink
@@ -39,7 +39,7 @@ function Sidebar() {
 						})
 					}
 				>
-					<Explore />
+					<Icon.Explore />
 					<span className={cx('title')}>Khám phá</span>
 				</NavLink>
 				<NavLink
@@ -50,7 +50,7 @@ function Sidebar() {
 						})
 					}
 				>
-					<Live />
+					<Icon.Live />
 					<span className={cx('title')}>LIVE</span>
 				</NavLink>
 			</ul>

@@ -1,11 +1,11 @@
 import classNames from 'classnames/bind';
-import styles from '../Authenticator.module.scss';
+import styles from './Phone.module.scss';
 
 const cx = classNames.bind(styles);
 
 function Phone() {
 	return (
-		<>
+		<div className={cx('wrapper')}>
 			<div className={cx('phone')}>
 				<select defaultValue="vn">
 					<option value="alba">Alabania +355</option>
@@ -22,11 +22,11 @@ function Phone() {
 			</div>
 			<div className={cx('phone-code')}>
 				<input placeholder="Nhập mã gồm 6 chữ số" />
-				<button>Gửi mã</button>
+				<button className={cx({ disabled: '2' })}>Gửi mã</button>
 			</div>
-			<span>Đăng nhập với mật khẩu</span>
-			<button>Đăng nhập</button>
-		</>
+			<span className={cx('change-to-password')}>Đăng nhập với mật khẩu</span>
+			<button className={cx('login')}>Đăng nhập</button>
+		</div>
 	);
 }
 

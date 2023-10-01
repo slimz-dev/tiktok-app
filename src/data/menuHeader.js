@@ -1,18 +1,18 @@
-import { Language, Lightbulb, Question, Keyboard, Night, LeftArrow } from '~/Icons';
+import { Icon } from '~/Icons';
 import languages from './languages';
 
 const menuHeader = [
 	{
-		icon: Lightbulb,
+		icon: Icon.Lightbulb,
 		title: 'Trung tâm Nhà sáng tạo LIVE',
 		href: 'https://www.tiktok.com/live/creators/vi-VN/?enter_from=more&lang=vi-VN&region=VN',
 	},
 	{
-		icon: Language,
+		icon: Icon.Language,
 		title: 'Tiếng Việt',
 		children: {
 			isChildren: true,
-			icon: LeftArrow,
+			icon: Icon.LeftArrow,
 			title: 'Language',
 			styles: {
 				width: '223px',
@@ -24,17 +24,17 @@ const menuHeader = [
 		},
 	},
 	{
-		icon: Question,
+		icon: Icon.Question,
 		title: 'Phản hồi và trợ giúp',
 		to: '/QA',
 	},
 	{
-		icon: Keyboard,
+		icon: Icon.Keyboard,
 		title: 'Phím tắt trên bàn phím',
 		to: '/keyboard',
 	},
 	{
-		icon: Night,
+		icon: Icon.Night,
 		title: 'Chế độ tối',
 	},
 ];

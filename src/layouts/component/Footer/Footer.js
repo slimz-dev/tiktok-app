@@ -1,7 +1,9 @@
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 
 import styles from './Footer.module.scss';
-import images from '~/assets/img';
+import config from '~/config';
+import { Icon } from '~/Icons';
 import { languages } from '~/data';
 import { linkItem1, linkItem2, linkItem3, linkItem4 } from './data';
 import FooterLink from '~/components/FooterLink';
@@ -15,14 +17,19 @@ function Footer() {
 		<div className={cx('footer')}>
 			<div className={cx('link')}>
 				<LinkWrapper>
-					<a
-						href="https://www.tiktok.com/"
+					<Link
+						to={config.routes.Home[0]}
 						style={{
 							borderBottom: 'none',
+							display: 'flex',
+							width: '40%',
+							height: '24%',
 						}}
 					>
-						<img src={images.blacklogo} alt="tiktok logo" />
-					</a>
+						<span className={cx('logo-wrapper')}>
+							<Icon.Logo />
+						</span>
+					</Link>
 				</LinkWrapper>
 
 				<LinkWrapper>

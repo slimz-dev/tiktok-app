@@ -1,0 +1,12 @@
+.wrapper {
+	padding: 0 60px;
+	display: flex;
+}
+
+.qr-step {
+	padding: 10px;
+	font-size: 15px;
+	.step + .step {
+		margin-top: 12px;
+	}
+}

@@ -3,7 +3,7 @@ import styles from './DownloadPopper.module.scss';
 import TyppyWrapper from '~/layouts/component/TyppyWrapper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { TikTokApp } from '~/Icons';
+import { Icon } from '~/Icons';
 const cx = classNames.bind(styles);
 function DownloadPopper() {
 	return (
@@ -11,7 +11,7 @@ function DownloadPopper() {
 			<div className={cx('wrapper')}>
 				<div className={cx('header')}>
 					<span className={cx('header-icon')}>
-						<TikTokApp />
+						<Icon.TikTokApp />
 					</span>
 					<h3 className={cx('title')}>Ứng dụng Tiktok cho máy tính</h3>
 				</div>

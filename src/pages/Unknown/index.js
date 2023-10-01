@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 
 import styles from './Unknown.module.scss';
 import config from '~/config';
-import images from '~/assets/img';
+
+import { PlayButton } from '~/Icons/Icons';
 import { app } from './data';
 import AppList from './Applist';
 import PopUpQr from './PopUpQR';
@@ -50,7 +51,7 @@ function Unknown() {
 						}
 					>
 						<button>
-							<img src={images.playbutton} alt="play button" />
+							<PlayButton />
 							Xem ngay
 						</button>
 					</Link>

@@ -1,30 +1,30 @@
-import { User, Favorite, Coin, Setting, Logout } from '~/Icons';
+import { Icon } from '~/Icons';
 import menuHeader from './menuHeader';
 
 const menuHeaderUser = [
 	{
-		icon: User,
+		icon: Icon.User,
 		title: 'Xem hồ sơ',
 		href: 'https://www.tiktok.com/live/creators/vi-VN/?enter_from=more&lang=vi-VN&region=VN',
 	},
 	{
-		icon: Favorite,
+		icon: Icon.Favorite,
 		title: 'Yêu thích',
 		href: 'https://www.tiktok.com/live/creators/vi-VN/?enter_from=more&lang=vi-VN&region=VN',
 	},
 	{
-		icon: Coin,
+		icon: Icon.Coin,
 		title: 'Nhận xu',
 		to: '/coin',
 	},
 	{
-		icon: Setting,
+		icon: Icon.Setting,
 		title: 'Cài đặt',
 		to: '/setting',
 	},
 	...menuHeader,
 	{
-		icon: Logout,
+		icon: Icon.Logout,
 		title: 'Đăng xuất',
 		onClick: true,
 		separator: true,

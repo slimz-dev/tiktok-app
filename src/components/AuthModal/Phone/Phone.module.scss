@@ -1,0 +1,81 @@
+.wrapper {
+	padding: 0 60px;
+}
+
+.phone {
+	height: 44px;
+	background: rgba(22, 24, 35, 0.06);
+	border-radius: 8px;
+	select {
+		height: 100%;
+		width: 80px;
+		background: transparent;
+		border: none;
+
+		border-right: 1px solid rgba(22, 24, 35, 0.12);
+	}
+
+	input {
+		height: 100%;
+		padding-left: 16px;
+		caret-color: var(--primary);
+		width: 320px;
+		background: transparent;
+	}
+}
+::placeholder {
+	color: rgba(22, 24, 35, 0.34);
+	font-size: 16px;
+}
+.phone-code {
+	display: flex;
+	height: 44px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	background: rgba(22, 24, 35, 0.06);
+	border-radius: 8px;
+	input {
+		height: 100%;
+		caret-color: var(--primary);
+		background: transparent;
+		flex: 1;
+		padding-left: 14px;
+	}
+	button {
+		background: transparent;
+		border-left: 1px solid rgba(22, 24, 35, 0.12);
+		height: 100%;
+		display: flex;
+		font-weight: bold;
+		font-size: 16px;
+		align-items: center;
+		padding: 0px 16px;
+	}
+}
+
+.change-to-password {
+	color: rgba(22, 24, 35, 0.75);
+	font-weight: 600;
+	font-size: 12px;
+	&:hover {
+		cursor: pointer;
+		text-decoration: underline;
+	}
+}
+
+.login {
+	border-radius: 8px;
+	height: 44px;
+	width: 400px;
+	color: rgba(22, 24, 35, 0.34);
+	background-color: rgba(22, 24, 35, 0.06);
+	font-weight: 700;
+	font-size: 17px;
+	margin-top: 12px;
+}
+
+.disabled {
+	color: rgba(22, 24, 35, 0.34);
+	font-weight: 400;
+	cursor: not-allowed;
+}
