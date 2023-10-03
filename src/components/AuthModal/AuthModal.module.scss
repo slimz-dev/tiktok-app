@@ -1,3 +1,25 @@
+:root {
+	--content-background: white;
+	--title-color: black;
+	--log-option-color: white;
+	--split-line-color: rgba(22, 24, 35, 0.12);
+	--method-des-color: rgba(22, 24, 35, 0.5);
+	--method-background-color: rgba(22, 24, 35, 0.06);
+	--description-footer-color: rgba(22, 24, 35, 0.5);
+	--description-footer-background: white;
+}
+
+[data-theme='dark'] {
+	--content-background: rgb(37, 37, 37);
+	--title-color: white;
+	--log-option-color: #404040;
+	--split-line-color: rgba(255, 255, 255, 0.12);
+	--method-des-color: rgba(255, 255, 255, 0.75);
+	--method-background-color: #404040;
+	--description-footer-color: rgba(255, 255, 255, 0.5);
+	--description-footer-background: rgb(18, 18, 18);
+}
+
 .wrapper {
 	position: fixed;
 	overflow: hidden;
@@ -9,7 +31,7 @@
 	background: rgba(0, 0, 0, 0.5);
 	.content {
 		border-radius: 8px;
-		background: white;
+		background: var(--content-background);
 		margin: auto;
 		margin-top: 4%;
 		width: 520px;
@@ -22,6 +44,7 @@
 			align-items: center;
 			margin-bottom: 16px;
 			.title {
+				color: var(--title-color);
 				font-weight: bold;
 				font-size: 24px;
 				margin-top: 48px;
@@ -40,12 +63,15 @@
 
 			.log-container {
 				display: flex;
-				justify-content: space-around;
+				justify-content: center;
 				width: 400px;
 				.log-option {
+					color: var(--default-text-color);
+					background: var(--log-option-color);
 					border-radius: 24px;
 					height: 30px;
 					padding: 0px 20px;
+					margin-left: 10px;
 					font-weight: bold;
 					&:hover {
 						cursor: pointer;
@@ -67,11 +93,11 @@
 		.split-line {
 			width: 122px;
 			height: 1px;
-			background: rgba(22, 24, 35, 0.12);
+			background: var(--split-line-color);
 		}
 
 		.des {
-			color: rgba(22, 24, 35, 0.5);
+			color: var(--method-des-color);
 		}
 	}
 
@@ -80,6 +106,8 @@
 		display: flex;
 		flex-direction: column;
 		.method {
+			color: var(--default-text-color);
+			background: var(--method-background-color);
 			position: relative;
 			border-radius: 8px;
 			height: 36px;
@@ -89,7 +117,6 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-
 			&:hover {
 				cursor: pointer;
 			}
@@ -103,10 +130,14 @@
 
 	.description {
 		text-align: center;
-		color: rgba(22, 24, 35, 0.5);
+		color: var(--description-footer-color);
+		background: var(--description-footer-background);
 		font-size: 13px;
 		padding: 18px 70px;
 		line-height: 1.4;
+		a {
+			color: var(--default-text-color);
+		}
 	}
 
 	.logout-transfer {
@@ -115,10 +146,11 @@
 		justify-content: center;
 		align-items: center;
 		height: 66px;
+		color: var(--default-text-color);
 
 		button {
 			color: var(--primary);
-			background-color: white;
+			background-color: transparent;
 			font-weight: 600;
 			font-size: 14px;
 			padding-left: 6px;
@@ -132,6 +164,6 @@
 }
 
 .active {
-	background: black;
-	color: white;
+	background: black !important;
+	color: white !important;
 }

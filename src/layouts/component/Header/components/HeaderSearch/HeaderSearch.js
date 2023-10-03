@@ -7,7 +7,7 @@ import { faSpinner, faCircleXmark, faMagnifyingGlass } from '@fortawesome/free-s
 import { search } from '~/services/searchService';
 import { useDebounce } from '~/hooks';
 import styles from './HeaderSearch.module.scss';
-import SearchList from '~/layouts/component/Header/HeaderSearch/SearchList';
+import SearchList from './SearchList';
 const cx = classNames.bind(styles);
 
 function HeaderSearch() {

@@ -8,14 +8,14 @@ import { faPlus, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Header.module.scss';
 import { menuHeader, menuHeaderUser } from '~/data';
-import MenuItems from '~/layouts/component/Header/MenuItems';
+import MenuItems from '~/layouts/component/Header/components/MenuItems';
 
 import AuthModal from '~/components/AuthModal';
 import { UserContext } from '~/components/UserContext';
 import AuthProvider from '~/components/AuthProvider';
 import TippyMessage from '~/components/TippyMessage';
-import DownloadPopper from '~/layouts/component/Header/DownloadPopper';
-import HeaderSearch from '~/layouts/component/Header/HeaderSearch';
+import DownloadPopper from '~/layouts/component/Header/components/DownloadPopper';
+import HeaderSearch from '~/layouts/component/Header/components/HeaderSearch';
 import Img from '~/components/Img';
 import { Icon } from '~/Icons';
 const cx = classNames.bind(styles);

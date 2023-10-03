@@ -1,4 +1,4 @@
-import * as request from '~/utils/request';
+import request from '~/utils/request';
 
 export const search = async (query, type = 'less') => {
 	const res = await request.get('users/search', {
@@ -7,5 +7,5 @@ export const search = async (query, type = 'less') => {
 			type,
 		},
 	});
-	return res;
+	return res.data;
 };

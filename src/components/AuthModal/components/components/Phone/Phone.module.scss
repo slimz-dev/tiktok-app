@@ -1,17 +1,33 @@
+:root {
+	--input-color: rgba(22, 24, 35, 0.06);
+	--button-disabled-text: rgba(22, 24, 35, 0.34);
+	--button-code: transparent;
+	--change-to-password-color: rgba(22, 24, 35, 0.75);
+	--submit-text: rgba(22, 24, 35, 0.34);
+}
+
+[data-theme='dark'] {
+	--button-code: rgb(54 54 54);
+	--button-disabled-text: rgba(255, 255, 255, 0.34);
+	--input-color: #404040;
+	--change-to-password-color: rgba(255, 255, 255, 0.75);
+	--submit-text: rgba(255, 255, 255, 0.34);
+}
+
 .wrapper {
 	padding: 0 60px;
 }
 
 .phone {
 	height: 44px;
-	background: rgba(22, 24, 35, 0.06);
+	background: var(--input-color);
 	border-radius: 8px;
 	select {
 		height: 100%;
 		width: 80px;
 		background: transparent;
 		border: none;
-
+		color: var(--default-text-color);
 		border-right: 1px solid rgba(22, 24, 35, 0.12);
 	}
 
@@ -32,7 +48,7 @@
 	height: 44px;
 	margin-top: 12px;
 	margin-bottom: 12px;
-	background: rgba(22, 24, 35, 0.06);
+	background: var(--input-color);
 	border-radius: 8px;
 	input {
 		height: 100%;
@@ -42,7 +58,8 @@
 		padding-left: 14px;
 	}
 	button {
-		background: transparent;
+		color: var(--default-text-color);
+		background: var(--button-code);
 		border-left: 1px solid rgba(22, 24, 35, 0.12);
 		height: 100%;
 		display: flex;
@@ -50,11 +67,12 @@
 		font-size: 16px;
 		align-items: center;
 		padding: 0px 16px;
+		cursor: pointer;
 	}
 }
 
 .change-to-password {
-	color: rgba(22, 24, 35, 0.75);
+	color: var(--change-to-password-color);
 	font-weight: 600;
 	font-size: 12px;
 	&:hover {
@@ -67,15 +85,20 @@
 	border-radius: 8px;
 	height: 44px;
 	width: 400px;
-	color: rgba(22, 24, 35, 0.34);
-	background-color: rgba(22, 24, 35, 0.06);
+	color: var(--submit-text);
+	background-color: var(--input-color);
 	font-weight: 700;
 	font-size: 17px;
 	margin-top: 12px;
 }
 
 .disabled {
-	color: rgba(22, 24, 35, 0.34);
-	font-weight: 400;
-	cursor: not-allowed;
+	color: var(--button-disabled-text) !important;
+	cursor: not-allowed !important;
+}
+
+.active {
+	background: var(--primary);
+	color: white;
+	cursor: pointer;
 }

@@ -1,9 +1,20 @@
+import { useContext, useState } from 'react';
 import classNames from 'classnames/bind';
+
+import { RegisterContext } from '../../RegisterProvider';
 import styles from './Phone.module.scss';
 
 const cx = classNames.bind(styles);
 
 function Phone() {
+	const register = useContext(RegisterContext);
+	const [data, setData] = useState({});
+	function handleChange(e) {
+		const key = e.target.id;
+		const value = e.target.value;
+		setData((prev) => ({ ...prev, [key]: value }));
+	}
+	const submitButton = register === false ? 'Đăng nhập' : 'Tiếp';
 	return (
 		<div className={cx('wrapper')}>
 			<div className={cx('phone')}>
@@ -18,14 +29,22 @@ function Phone() {
 					<option value="us">United State +1</option>
 					<option value="uk">United Kingdom +44</option>
 				</select>
-				<input placeholder="Số điện thoại" />
+				<input onChange={handleChange} id="phone" placeholder="Số điện thoại" />
 			</div>
 			<div className={cx('phone-code')}>
-				<input placeholder="Nhập mã gồm 6 chữ số" />
-				<button className={cx({ disabled: '2' })}>Gửi mã</button>
+				<input onChange={handleChange} id="code" placeholder="Nhập mã gồm 6 chữ số" />
+				<button className={cx({ disabled: !data.phone })}>Gửi mã</button>
 			</div>
 			<span className={cx('change-to-password')}>Đăng nhập với mật khẩu</span>
-			<button className={cx('login')}>Đăng nhập</button>
+			<button
+				className={cx('login', {
+					active:
+						Object.values(data).length === 2 &&
+						Object.values(data).every((data) => data !== ''),
+				})}
+			>
+				{submitButton}
+			</button>
 		</div>
 	);
 }

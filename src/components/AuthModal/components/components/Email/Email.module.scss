@@ -11,7 +11,7 @@
 	input {
 		border-radius: 8px;
 		height: 44px;
-		background-color: rgba(22, 24, 35, 0.06);
+		background-color: var(--input-color);
 		padding-left: 14px;
 		caret-color: var(--primary);
 	}
@@ -26,10 +26,11 @@
 	font-size: 16px;
 }
 .forgot-password {
-	color: rgba(22, 24, 35, 0.75);
+	color: var(--change-to-password-color);
 	font-weight: 600;
 	font-size: 12px;
 	margin-top: 12px;
+	width: max-content;
 	&:hover {
 		cursor: pointer;
 		text-decoration: underline;
@@ -40,9 +41,15 @@
 	border-radius: 8px;
 	height: 44px;
 	width: 400px;
-	color: rgba(22, 24, 35, 0.34);
-	background-color: rgba(22, 24, 35, 0.06);
+	color: var(--submit-text);
+	background-color: var(--input-color);
 	font-weight: 700;
 	font-size: 17px;
 	margin-top: 12px;
+}
+
+.active {
+	background: var(--primary);
+	color: white;
+	cursor: pointer;
 }

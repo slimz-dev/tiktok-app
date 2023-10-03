@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import ReactSwitch from 'react-switch';
 import classNames from 'classnames/bind';
 
-import { Theme } from '../../../../components/ThemeProvider';
+import { Theme } from '~/components/ThemeProvider';
 import { UserContext } from '~/components/UserContext';
 import styles from './MenuItems.module.scss';
 import TyppyWrapper from '~/layouts/component/TyppyWrapper';
