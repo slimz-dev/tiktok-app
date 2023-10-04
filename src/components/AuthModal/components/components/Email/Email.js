@@ -2,13 +2,17 @@ import { useContext, useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { Theme } from '~/components/ThemeProvider';
 import { RegisterContext } from '~/components/AuthModal/components/RegisterProvider';
+import { user } from '~/services/userService';
 import { registration } from '~/services/registerService';
 import styles from './Email.module.scss';
 
 const cx = classNames.bind(styles);
 
 function Email() {
+	const themeContext = useContext(Theme);
 	const [data, setData] = useState({ email: '', password: '' });
 	const [isSubmit, setIsSubmit] = useState(false);
 	const register = useContext(RegisterContext);
@@ -41,14 +45,51 @@ function Email() {
 						pauseOnHover: false,
 						draggable: true,
 						progress: undefined,
-						theme: 'dark',
+						theme: themeContext.theme,
 					});
 				}
 			};
-			setIsSubmit(false);
 			registrationFetch();
+		} else if (isSubmit) {
+			const fetchUser = async () => {
+				try {
+					const result = await user(data);
+					console.log(result.data);
+					toast('Đăng nhập thành công', {
+						icon: '🚀',
+						position: 'top-center',
+						autoClose: 5000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: false,
+						draggable: true,
+						progress: undefined,
+						theme: themeContext.theme,
+					});
+				} catch (err) {
+					let errMsg;
+					if (err.response.status === 401) {
+						errMsg = 'Đăng nhập có lỗi !';
+					} else if (err.response.status === 422) {
+						errMsg = 'Vui lòng nhập đúng email';
+					}
+					toast(errMsg, {
+						icon: '🚀',
+						position: 'top-center',
+						autoClose: 5000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: false,
+						draggable: true,
+						progress: undefined,
+						theme: themeContext.theme,
+					});
+				}
+			};
+			fetchUser();
 		}
-	}, [data, isSubmit]);
+		setIsSubmit(false);
+	}, [data, isSubmit, themeContext.theme]);
 	function handleChange(e) {
 		const key = e.target.id;
 		const value = e.target.value;
@@ -62,6 +103,8 @@ function Email() {
 				type: 'email',
 				...prev,
 			}));
+			setIsSubmit(true);
+		} else if (Object.values(data).every((data) => data !== '')) {
 			setIsSubmit(true);
 		}
 	}

@@ -21,7 +21,7 @@ function Login() {
 
 	function handleClose() {
 		Auth.setAuth(false);
-		document.body.style.overflow = 'scroll';
+		document.body.style.overflow = 'auto';
 	}
 	return (
 		<>
