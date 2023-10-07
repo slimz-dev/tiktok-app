@@ -3,15 +3,17 @@ import classNames from 'classnames/bind';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Theme } from '~/components/ThemeProvider';
-import { RegisterContext } from '~/components/AuthModal/components/RegisterProvider';
-import { user } from '~/services/userService';
-import { registration } from '~/services/registerService';
+import { Theme } from '~/context/ThemeProvider';
+import { UserContext } from '~/context/UserProvider';
+import { RegisterContext } from '~/context/RegisterProvider';
+import { userLogin } from '~/services/userService';
+import { userRegistration } from '~/services/registerService';
 import styles from './Email.module.scss';
 
 const cx = classNames.bind(styles);
 
 function Email() {
+	const userCookie = useContext(UserContext);
 	const themeContext = useContext(Theme);
 	const [data, setData] = useState({ email: '', password: '' });
 	const [isSubmit, setIsSubmit] = useState(false);
@@ -22,7 +24,7 @@ function Email() {
 		if (isSubmit && data.type === 'email') {
 			const registrationFetch = async () => {
 				try {
-					const res = await registration(data);
+					const res = await userRegistration(data);
 					console.log('respone: ', res);
 				} catch (err) {
 					let errorMsg;
@@ -53,8 +55,8 @@ function Email() {
 		} else if (isSubmit) {
 			const fetchUser = async () => {
 				try {
-					const result = await user(data);
-					console.log(result.data);
+					const result = await userLogin(data);
+					console.log(result);
 					toast('Đăng nhập thành công', {
 						icon: '🚀',
 						position: 'top-center',
@@ -68,10 +70,12 @@ function Email() {
 					});
 				} catch (err) {
 					let errMsg;
-					if (err.response.status === 401) {
+					if (err.response?.status === 401) {
 						errMsg = 'Đăng nhập có lỗi !';
-					} else if (err.response.status === 422) {
+					} else if (err.response?.status === 422) {
 						errMsg = 'Vui lòng nhập đúng email';
+					} else {
+						console.log(err);
 					}
 					toast(errMsg, {
 						icon: '🚀',

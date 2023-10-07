@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import classNames from 'classnames/bind';
 
-import { RegisterContext } from '../../RegisterProvider';
+import { RegisterContext } from '../../../../../context/RegisterProvider';
 import styles from './Phone.module.scss';
 
 const cx = classNames.bind(styles);

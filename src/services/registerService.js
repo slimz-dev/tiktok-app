@@ -1,6 +1,6 @@
 import regInstance from '~/utils/registerInstance';
 import { toast } from 'react-toastify';
-export const registration = async (data) => {
+export const userRegistration = async (data) => {
 	const res = await regInstance.post('auth/register', data);
 	return res.data;
 };

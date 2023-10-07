@@ -11,8 +11,8 @@ import { menuHeader, menuHeaderUser } from '~/data';
 import MenuItems from '~/layouts/component/Header/components/MenuItems';
 
 import AuthModal from '~/components/AuthModal';
-import { UserContext } from '~/components/UserContext';
-import AuthProvider from '~/components/AuthProvider';
+import { UserContext } from '~/context/UserProvider';
+import AuthProvider from '~/context/AuthProvider';
 import TippyMessage from '~/components/TippyMessage';
 import DownloadPopper from '~/layouts/component/Header/components/DownloadPopper';
 import HeaderSearch from '~/layouts/component/Header/components/HeaderSearch';

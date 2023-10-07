@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import classNames from 'classnames/bind';
 
 import { Icon } from '~/Icons';
-import { AuthContext } from '~/components/AuthProvider';
+import { AuthContext } from '~/context/AuthProvider';
 import Phone from '../components/Phone';
 import Email from '../components/Email';
 import styles from '../../AuthModal.module.scss';

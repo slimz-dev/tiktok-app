@@ -1,6 +1,10 @@
 import request from '~/utils/request';
 
-export const user = async (data) => {
-	const response = await request.post('auth/login', data);
+export const userLogin = async (data) => {
+	const userData = {
+		...data,
+	};
+	const response = await request.post('auth/login', userData, { withCredentials: true });
+	// console.log('from service', response);
 	return response.data;
 };

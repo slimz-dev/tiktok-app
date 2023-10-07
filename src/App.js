@@ -2,8 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 import { PublicRoutes } from './router';
 import { useContext } from 'react';
 
-import UserProvider from '~/components/UserContext';
-import { Theme } from './components/ThemeProvider';
+import UserProvider from '~/context/UserProvider';
+import { Theme } from './context/ThemeProvider';
 function App() {
 	const themeContext = useContext(Theme);
 	return (

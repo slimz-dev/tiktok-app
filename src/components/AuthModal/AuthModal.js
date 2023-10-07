@@ -2,7 +2,7 @@ import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './AuthModal.module.scss';
 
-import RegisterProvider from './components/RegisterProvider';
+import RegisterProvider from '../../context/RegisterProvider';
 import Login from './components/Login';
 import Register from './components/Register';
 import { Icon } from '~/Icons';
