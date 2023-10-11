@@ -4,6 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Theme } from '~/context/ThemeProvider';
+import { AuthContext } from '~/context/AuthProvider';
 import { UserContext } from '~/context/UserProvider';
 import { RegisterContext } from '~/context/RegisterProvider';
 import { userLogin } from '~/services/userService';
@@ -14,6 +15,7 @@ const cx = classNames.bind(styles);
 
 function Email() {
 	const userCookie = useContext(UserContext);
+	const Auth = useContext(AuthContext);
 	const themeContext = useContext(Theme);
 	const [data, setData] = useState({ email: '', password: '' });
 	const [isSubmit, setIsSubmit] = useState(false);
@@ -55,8 +57,6 @@ function Email() {
 		} else if (isSubmit) {
 			const fetchUser = async () => {
 				try {
-					const result = await userLogin(data);
-					console.log(result);
 					toast('Đăng nhập thành công', {
 						icon: '🚀',
 						position: 'top-center',
@@ -68,6 +68,10 @@ function Email() {
 						progress: undefined,
 						theme: themeContext.theme,
 					});
+					const result = await userLogin(data);
+					userCookie.setToken(result.token);
+					userCookie.setLoggedIn(true);
+					Auth.handleClose();
 				} catch (err) {
 					let errMsg;
 					if (err.response?.status === 401) {
@@ -93,7 +97,7 @@ function Email() {
 			fetchUser();
 		}
 		setIsSubmit(false);
-	}, [data, isSubmit, themeContext.theme]);
+	}, [data, isSubmit, themeContext.theme, userCookie, Auth]);
 	function handleChange(e) {
 		const key = e.target.id;
 		const value = e.target.value;

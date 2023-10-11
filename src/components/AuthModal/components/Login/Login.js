@@ -19,15 +19,11 @@ function Login() {
 		setOption({ select: selectedOption });
 	}
 
-	function handleClose() {
-		Auth.setAuth(false);
-		document.body.style.overflow = 'auto';
-	}
 	return (
 		<>
 			<header className={cx('header')}>
 				<span className={cx('title')}>Đăng nhập vào Tiktok</span>
-				<span className={cx('clear-button')} onClick={handleClose}>
+				<span className={cx('clear-button')} onClick={Auth.handleClose}>
 					<Icon.ClearButton width="32px" height="32px" />
 				</span>
 				<div className={cx('log-container')}>

@@ -1,10 +1,11 @@
 import React from 'react';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import ReactSwitch from 'react-switch';
 import classNames from 'classnames/bind';
 
 import { Theme } from '~/context/ThemeProvider';
 import { UserContext } from '~/context/UserProvider';
+import { logOut } from '~/services/logoutService';
 import styles from './MenuItems.module.scss';
 import TyppyWrapper from '~/layouts/component/TyppyWrapper';
 import Button from '~/components/Button/Button';
@@ -23,8 +24,21 @@ function check(data) {
 function MenuItems({ data }) {
 	const themeContext = useContext(Theme);
 	const userContext = useContext(UserContext);
+	const [isLogout, setIsLogout] = useState(false);
 	const [menu, setMenu] = useState([data]);
 	const menuRender = menu[menu.length - 1];
+	useEffect(() => {
+		if (isLogout === true) {
+			console.log(userContext.token);
+			const logOutApi = async () => {
+				const response = await logOut(userContext.token);
+				console.log(response);
+			};
+			logOutApi();
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isLogout]);
+
 	return (
 		<TyppyWrapper>
 			<div className={cx('typpy-menu')}>
@@ -64,7 +78,7 @@ function MenuItems({ data }) {
 									})}
 									onClick={() => {
 										if (menu.title === 'Đăng xuất') {
-											userContext.setUser(false);
+											setIsLogout(true);
 										}
 										if (menu.children) {
 											setMenu((prev) => {

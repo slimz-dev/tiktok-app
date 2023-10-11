@@ -30,7 +30,10 @@ function Header() {
 
 	const authModal = {
 		auth,
-		setAuth,
+		handleClose: () => {
+			setAuth(false);
+			document.body.style.overflow = 'auto';
+		},
 	};
 
 	return (
@@ -48,14 +51,14 @@ function Header() {
 							<FontAwesomeIcon icon={faPlus} className={cx('plus-icon')} />
 							<span className={cx('plus')}>Tải lên</span>
 						</button>
-						{userState.user ? (
+						{userState.loggedIn ? (
 							<></>
 						) : (
 							<button className={cx('login-container')} onClick={handleAuth}>
 								<span className={cx('login')}>Đăng nhập</span>
 							</button>
 						)}
-						{userState.user ? (
+						{userState.loggedIn ? (
 							<>
 								<Tippy
 									offset={[-60, 22]}
