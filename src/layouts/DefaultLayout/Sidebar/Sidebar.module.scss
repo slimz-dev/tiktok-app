@@ -50,6 +50,8 @@
 	}
 	.login-box {
 		border-top: var(--login-border-top);
+		display: flex;
+		flex-direction: column;
 		border-bottom: solid 1px var(--login-border-bottom);
 		border-left: none;
 		border-right: none;
@@ -79,6 +81,7 @@
 		}
 
 		.placeholder {
+			flex: 1;
 			height: 149px;
 		}
 	}

@@ -1,6 +1,12 @@
+import { lazy } from 'react';
 import config from '~/config';
-import { Home, Following, Upload, Profile, Unknown } from '~/pages';
+
 import { DefaultLayout, HeaderOnlyLayout, HeaderFooterLayout } from '~/layouts';
+const Home = lazy(() => import('~/pages/Home'));
+const Following = lazy(() => import('~/pages/Following'));
+const Upload = lazy(() => import('~/pages/Upload'));
+const Profile = lazy(() => import('~/pages/Profile'));
+const Unknown = lazy(() => import('~/pages/Unknown'));
 
 const definePath = (path, component, layout = DefaultLayout) => {
 	if (Array.isArray(path)) {
