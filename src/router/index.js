@@ -27,7 +27,7 @@ const definePath = (path, component, layout = DefaultLayout) => {
 const PublicRoutes = [
 	...definePath(config.routes.Home, Home),
 	...definePath(config.routes.Following, Following),
-	...definePath(config.routes.Upload, Upload, HeaderOnlyLayout),
+	...definePath(config.routes.Upload, Upload),
 	...definePath(config.routes.Profile, Profile),
 	...definePath(config.routes.Unknown, Unknown, HeaderFooterLayout),
 ];

@@ -3,13 +3,18 @@ import request from '~/utils/request';
 export const logOut = async (token) => {
 	try {
 		const userToken = token.trim();
-		const response = await request.post('auth/logout', {
+		//Logout
+		await request.post('auth/logout', {
+			Authorization: {
+				Type: 'Bearer Token',
+			},
 			headers: {
 				Authorization: `Bearer ${userToken}`,
 			},
 		});
-		return response;
+		return undefined;
 	} catch (e) {
+		console.log('token', token);
 		console.log(e);
 	}
 };

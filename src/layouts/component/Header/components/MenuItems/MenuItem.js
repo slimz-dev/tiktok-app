@@ -32,7 +32,9 @@ function MenuItems({ data }) {
 			console.log(userContext.token);
 			const logOutApi = async () => {
 				const response = await logOut(userContext.token);
-				console.log(response);
+				if (response === undefined) {
+					userContext.setLoggedIn(false);
+				}
 			};
 			logOutApi();
 		}
