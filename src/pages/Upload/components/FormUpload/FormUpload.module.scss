@@ -1,0 +1,76 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.hidden {
+	display: none;
+}
+
+//Header
+.video-sub-heading {
+	color: rgba(22, 24, 35, 0.5);
+	font-weight: 400;
+}
+
+//Body
+.video-container {
+	display: flex;
+	flex-direction: row;
+}
+
+//Left-side
+.video-content {
+	padding: 20px 0px;
+}
+
+.video-render {
+	width: 240px;
+	height: 468px;
+	border-radius: 8px;
+	border: 3px solid;
+}
+
+.video-option {
+	width: 242px;
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid rgba(22, 24, 35, 0.12);
+	padding: 10px;
+	border-radius: 8px;
+}
+
+.video-verified {
+	display: flex;
+	width: 120px;
+	.video-name {
+		padding-left: 6px;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		font-size: 12px;
+		flex: 1;
+	}
+}
+
+.upload-button {
+	font-size: 14px;
+	font-weight: 600;
+	&:hover {
+		text-decoration: underline;
+		cursor: pointer;
+	}
+}
+
+//Right-side
+.setting {
+	flex: 1;
+	padding-top: 20px;
+	margin-left: 20px;
+	.video-description {
+		display: block;
+		border: 1px solid rgba(22, 24, 35, 0.12);
+		padding: 12px;
+		width: 100%;
+		border-radius: 5px;
+	}
+}

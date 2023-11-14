@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 
@@ -27,11 +27,12 @@ function NewUpload() {
 					<span className={cx('max-size')}>Nhỏ hơn 10 GB</span>
 				</div>
 				<input
+					ref={file.vidRef}
 					type="file"
 					id="files"
 					accept="video/mp4,video/x-m4v,video/*"
-					className={cx('hidden')}
-					onChange={file.handleChange}
+					className={cx('hidden', 'first')}
+					onChange={file.handleSetVideo}
 				/>
 				<label className={cx('upload-button')} for="files">
 					Chọn tập tin

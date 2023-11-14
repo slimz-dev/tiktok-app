@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useRef, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Upload.module.scss';
 
@@ -9,19 +9,29 @@ export const FileContext = createContext();
 const cx = classNames.bind(styles);
 
 function Upload() {
-	const [vid, setVid] = useState(false);
-	function handleChange() {
-		setVid(true);
+	const [isVid, setIsVid] = useState(false);
+	const vidRef = useRef();
+	function handleSetVideo() {
+		setIsVid(true);
+		if (isVid) {
+			//For re-render Form
+			setIsVid(Math.random());
+		}
 	}
-
+	useEffect(() => {
+		//Refresh return page
+		if (PerformanceNavigationTiming.type === PerformanceNavigationTiming.TYPE_RELOAD) {
+			setIsVid(false);
+		}
+	}, []);
 	const value = {
-		vid,
-		handleChange,
+		handleSetVideo,
+		vidRef,
 	};
 	return (
 		<div className={cx('wrapper')}>
 			<FileContext.Provider value={value}>
-				<div className={cx('container')}>{vid ? <FormUpload /> : <NewUpload />}</div>
+				<div className={cx('container')}>{isVid ? <FormUpload /> : <NewUpload />}</div>
 			</FileContext.Provider>
 		</div>
 	);
