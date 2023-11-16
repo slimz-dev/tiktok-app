@@ -46,6 +46,7 @@
 	.video-name {
 		padding-left: 6px;
 		text-overflow: ellipsis;
+		white-space: nowrap;
 		overflow: hidden;
 		font-size: 12px;
 		flex: 1;
@@ -63,14 +64,83 @@
 
 //Right-side
 .setting {
+	display: flex;
+	flex-direction: column;
 	flex: 1;
 	padding-top: 20px;
 	margin-left: 20px;
 	.video-description {
-		display: block;
 		border: 1px solid rgba(22, 24, 35, 0.12);
-		padding: 12px;
+		padding: 14px;
 		width: 100%;
 		border-radius: 5px;
+	}
+}
+
+.video-description-label,
+.video-viewable,
+.video-allow {
+	font-weight: 600;
+	padding-bottom: 8px;
+}
+
+#view {
+	border: 1px solid rgba(22, 24, 35, 0.12);
+}
+
+.select-viewable {
+	width: 30%;
+	height: 36px;
+}
+
+.allow-box {
+	display: flex;
+	justify-content: space-between;
+	width: 300px;
+}
+
+.input-checkbox {
+	margin-right: 10px;
+}
+
+.setting-option {
+	display: flex;
+	flex-direction: column;
+}
+
+.setting-option + .setting-option {
+	padding-top: 20px;
+}
+
+.submit {
+	display: flex;
+	justify-content: space-between;
+	width: 450px;
+	padding-top: 10px;
+}
+
+.event-button {
+	display: flex;
+	align-items: center;
+	height: 46px;
+	border: 1px solid #ccc;
+	padding: 0px 80px;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.cancel-button:hover {
+	background: rgba(245, 245, 245, 1);
+}
+.submit-button {
+	background: var(--primary);
+	color: white;
+	font-weight: 600;
+	font-size: 18px;
+
+	&:hover {
+		background: rgba(234, 40, 78, 1);
 	}
 }

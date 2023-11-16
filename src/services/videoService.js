@@ -9,3 +9,15 @@ export const videoList = async (page = '1', type = 'for-you') => {
 	});
 	return result.data;
 };
+
+request.interceptors.response.use(
+	(res) => {
+		return res;
+	},
+	(err) => {
+		if (err.response.status === 401) {
+			console.log('error');
+		}
+		return err;
+	}
+);

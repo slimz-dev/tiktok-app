@@ -18,6 +18,10 @@ function Upload() {
 			setIsVid(Math.random());
 		}
 	}
+
+	function handleCancel() {
+		setIsVid(false);
+	}
 	useEffect(() => {
 		//Refresh return page
 		if (PerformanceNavigationTiming.type === PerformanceNavigationTiming.TYPE_RELOAD) {
@@ -27,6 +31,7 @@ function Upload() {
 	const value = {
 		handleSetVideo,
 		vidRef,
+		handleCancel,
 	};
 	return (
 		<div className={cx('wrapper')}>
