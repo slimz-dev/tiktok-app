@@ -36,7 +36,8 @@ function FormUpload() {
 		const fetchApi = async () => {
 			const descriptionValue = descriptionRef.current.value;
 			const viewableValue = viewRef.current.value;
-			const videoSrc = URL.createObjectURL(uploadVideo);
+			const videoSrc = uploadVideo;
+			console.log(videoSrc);
 			const data = {
 				description: descriptionValue,
 				file: videoSrc,

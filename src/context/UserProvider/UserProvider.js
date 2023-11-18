@@ -7,13 +7,13 @@ function UserProvider({ children }) {
 		localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : false
 	);
 	const [token, setToken] = useState(
-		localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : ''
+		localStorage.getItem('token') ? localStorage.getItem('token') : ''
 	);
 	useEffect(() => {
 		// Kiem tra expired
 		if (loggedIn) {
 			const fetchLogged = async () => {
-				const userToken = JSON.parse(localStorage.getItem('token'));
+				const userToken = localStorage.getItem('token');
 				const response = await logged(userToken);
 				if (response === false) {
 					setLoggedIn(false);
@@ -23,7 +23,7 @@ function UserProvider({ children }) {
 		}
 
 		//Save token and state
-		localStorage.setItem('token', JSON.stringify(token));
+		localStorage.setItem('token', token);
 		localStorage.setItem('user', JSON.stringify(loggedIn));
 	}, [loggedIn, token]);
 	const userState = {
