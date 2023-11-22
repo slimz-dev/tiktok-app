@@ -1,27 +1,30 @@
 import requestUpload from '~/utils/requestUpload';
-
-export const uploadVid = async (token, data) => {
-	console.log(data);
-	const res = await requestUpload.post('videos', {
-		body: {
-			description: data.description,
-			upload_file: data.file,
-			thumbnail_time: 5,
-			viewable: data.viewable,
-			allows: 'comment',
-		},
-	});
-	return res;
+import { toast } from 'react-toastify';
+export const uploadVid = async (data) => {
+	try {
+		const res = await requestUpload.post('videos', data);
+		return res;
+	} catch (err) {
+		return err;
+	}
 };
 requestUpload.interceptors.response.use(
 	(res) => {
 		return res;
 	},
 	(err) => {
-		if (err.response.status === 401) {
-			console.log('error');
-			console.log(err);
+		if (err.response.status === 422) {
+			toast('Có lỗi khi nhập dữ liệu ..');
+		} else if (err.response.status === 413) {
+			toast('Dung lượng video quá lớn, xin hãy chọn video khác !');
 		}
 		return err;
 	}
 );
+
+// requestUpload.interceptors.request.use(
+// 	(res) => {
+// 		console.log('request >>>', res);
+// 	},
+// 	(err) => {}
+// );

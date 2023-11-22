@@ -71,7 +71,6 @@ function Email() {
 					const result = await userLogin(data);
 					userCookie.setToken(result.token);
 					userCookie.setLoggedIn(true);
-					Auth.handleClose();
 				} catch (err) {
 					let errMsg;
 					if (err.response?.status === 401) {

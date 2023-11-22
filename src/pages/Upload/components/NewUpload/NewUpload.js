@@ -1,7 +1,6 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
-
 import { FileContext } from '../../Upload';
 import classNames from 'classnames/bind';
 import styles from '../../Upload.module.scss';
@@ -10,6 +9,7 @@ const cx = classNames.bind(styles);
 
 function NewUpload() {
 	const file = useContext(FileContext);
+
 	return (
 		<>
 			<div className={cx('content')}>
@@ -24,7 +24,7 @@ function NewUpload() {
 				<div className={cx('size')}>
 					<span className={cx('resolution')}>Độ phân giải 720x1280 trở lên</span>
 					<span className={cx('max-length')}>Tối đa 10 phút</span>
-					<span className={cx('max-size')}>Nhỏ hơn 10 GB</span>
+					<span className={cx('max-size')}>Nhỏ hơn 20 MB</span>
 				</div>
 				<input
 					ref={file.vidRef}
@@ -32,9 +32,9 @@ function NewUpload() {
 					id="files"
 					accept="video/mp4,video/x-m4v,video/*"
 					className={cx('hidden', 'first')}
-					onChange={file.handleSetVideo}
+					onChange={file.handleCheckFile}
 				/>
-				<label className={cx('upload-button')} for="files">
+				<label className={cx('upload-button')} htmlFor="files">
 					Chọn tập tin
 				</label>
 			</div>

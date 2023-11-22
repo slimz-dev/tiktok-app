@@ -28,7 +28,6 @@ function Header() {
 	const userState = useContext(UserContext);
 	function handleAuth() {
 		setAuth(true);
-		document.body.style.overflow = 'hidden';
 	}
 	function handleUpload() {
 		if (userState.loggedIn) {
@@ -38,16 +37,14 @@ function Header() {
 		}
 	}
 
-	const authModal = {
-		auth,
+	const closeModal = {
 		handleClose: () => {
 			setAuth(false);
-			document.body.style.overflow = 'auto';
 		},
 	};
 
 	return (
-		<AuthProvider value={authModal}>
+		<AuthProvider value={closeModal}>
 			<header className={cx('wrapper')}>
 				<div className={cx('wrapper-content')}>
 					<Link to={config.routes.Home[0]} className={cx('header-logo')}>

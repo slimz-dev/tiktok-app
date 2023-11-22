@@ -5,4 +5,5 @@ const requestUpload = axios.create({
 });
 
 requestUpload.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+requestUpload.defaults.headers.common['Content-Type'] = 'multipart/form-data';
 export default requestUpload;

@@ -12,7 +12,7 @@ const cx = classNames.bind(styles);
 
 function Login() {
 	const [option, setOption] = useState({ select: 'phone' });
-	const Auth = useContext(AuthContext);
+	const toggleModal = useContext(AuthContext);
 	function handleChoose(e) {
 		e.preventDefault();
 		const selectedOption = e.target.id;
@@ -23,9 +23,13 @@ function Login() {
 		<>
 			<header className={cx('header')}>
 				<span className={cx('title')}>Đăng nhập vào Tiktok</span>
-				<span className={cx('clear-button')} onClick={Auth.handleClose}>
-					<Icon.ClearButton width="32px" height="32px" />
-				</span>
+				{toggleModal ? (
+					<span className={cx('clear-button')} onClick={toggleModal.handleClose}>
+						<Icon.ClearButton width="32px" height="32px" />
+					</span>
+				) : (
+					''
+				)}
 				<div className={cx('log-container')}>
 					<button
 						id="phone"

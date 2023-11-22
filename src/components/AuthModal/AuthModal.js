@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './AuthModal.module.scss';
 
@@ -13,6 +13,12 @@ function AuthModal() {
 	const [register, setRegister] = useState(false);
 	const transferTitle = register === false ? 'Bạn không có tài khoản?' : 'Bạn đã có tài khoản?';
 	const buttonName = register === false ? 'Đăng ký' : 'Đăng nhập';
+	useEffect(() => {
+		document.body.style.overflow = 'hidden';
+		return () => {
+			document.body.style.overflow = 'auto';
+		};
+	}, []);
 	function handleChange(e) {
 		e.preventDefault();
 		setRegister((prev) => {

@@ -5,11 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 import { FileContext } from '../../Upload';
 import { uploadVid } from '~/services/uploadService';
-import { UserContext } from '~/context/UserProvider';
 
 const cx = classNames.bind(styles);
 function FormUpload() {
-	const userCookie = useContext(UserContext);
 	const descriptionRef = useRef();
 	const viewRef = useRef();
 	const file = useContext(FileContext);
@@ -37,15 +35,20 @@ function FormUpload() {
 			const descriptionValue = descriptionRef.current.value;
 			const viewableValue = viewRef.current.value;
 			const videoSrc = uploadVideo;
-			console.log(videoSrc);
-			const data = {
-				description: descriptionValue,
-				file: videoSrc,
-				viewable: viewableValue,
-				allows: allow,
-			};
-			const result = await uploadVid(userCookie.token, data);
-			console.log(result);
+			if (descriptionValue !== '') {
+				const data = {
+					description: descriptionValue,
+					upload_file: videoSrc,
+					viewable: viewableValue,
+					allows: allow,
+					thumbnail_time: 5,
+				};
+				uploadVid(data);
+			} else if (videoSrc === undefined) {
+				file.toastHandle('Chưa có video nào được chọn !');
+			} else {
+				file.toastHandle('Vui lòng điền mô tả video của bạn !');
+			}
 		};
 		fetchApi();
 	}
@@ -58,11 +61,15 @@ function FormUpload() {
 			<div className={cx('video-container')}>
 				<div className={cx('video-preview')}>
 					<div className={cx('video-content')}>
-						<video
-							controls
-							className={cx('video-render')}
-							src={URL.createObjectURL(uploadVideo)}
-						></video>
+						{uploadVideo ? (
+							<video
+								controls
+								className={cx('video-render')}
+								src={URL.createObjectURL(uploadVideo)}
+							></video>
+						) : (
+							''
+						)}
 					</div>
 					<input
 						ref={file.vidRef}
@@ -70,21 +77,23 @@ function FormUpload() {
 						id="files"
 						accept="video/mp4,video/x-m4v,video/*"
 						className={cx('hidden', 'hi')}
-						onChange={file.handleSetVideo}
+						onChange={file.handleCheckFile}
 					></input>
 					<div className={cx('video-option')}>
 						<div className={cx('video-verified')}>
 							<FontAwesomeIcon icon={faCheckCircle} color="#050505"></FontAwesomeIcon>
-							<span className={cx('video-name')}>{uploadVideo.name}</span>
+							<span className={cx('video-name')}>
+								{uploadVideo ? uploadVideo.name : ''}
+							</span>
 						</div>
-						<label className={cx('upload-button')} for="files">
+						<label className={cx('upload-button')} htmlFor="files">
 							Chọn tập tin
 						</label>
 					</div>
 				</div>
 				<div className={cx('setting')}>
 					<div className={cx('setting-option')}>
-						<label className={cx('video-description-label')} for="title">
+						<label className={cx('video-description-label')} htmlFor="title">
 							Chú thích
 						</label>
 						<input
@@ -94,7 +103,7 @@ function FormUpload() {
 						></input>
 					</div>
 					<div className={cx('setting-option')}>
-						<label className={cx('video-viewable')} for="view">
+						<label className={cx('video-viewable')} htmlFor="view">
 							Ai có thể xem video này
 						</label>
 						<select ref={viewRef} id="view" className={cx('select-viewable')}>
@@ -115,7 +124,7 @@ function FormUpload() {
 									name="allow"
 									onChange={(e) => handleAllow(e)}
 								></input>
-								<label for="comment">Bình luận</label>
+								<label htmlFor="comment">Bình luận</label>
 							</div>
 							<div className={cx('allowed')}>
 								<input
@@ -126,7 +135,7 @@ function FormUpload() {
 									name="allow"
 									onChange={(e) => handleAllow(e)}
 								></input>
-								<label for="duet">Duet</label>
+								<label htmlFor="duet">Duet</label>
 							</div>
 							<div className={cx('allowed')}>
 								<input
@@ -137,7 +146,7 @@ function FormUpload() {
 									name="allow"
 									onChange={(e) => handleAllow(e)}
 								></input>
-								<label for="stich">Ghép nối</label>
+								<label htmlFor="stich">Ghép nối</label>
 							</div>
 						</div>
 					</div>
