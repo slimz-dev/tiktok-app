@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 export const uploadVid = async (data) => {
 	try {
 		const res = await requestUpload.post('videos', data);
-		return res;
+		return 'successfully uploaded';
 	} catch (err) {
 		return err;
 	}
@@ -21,10 +21,3 @@ requestUpload.interceptors.response.use(
 		return err;
 	}
 );
-
-// requestUpload.interceptors.request.use(
-// 	(res) => {
-// 		console.log('request >>>', res);
-// 	},
-// 	(err) => {}
-// );

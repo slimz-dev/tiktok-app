@@ -1,12 +1,11 @@
 .wrapper {
-	background-color: rgb(248, 248, 248);
+	background-color: var(--default-background-color);
 	width: 100%;
 	height: calc(100vh - var(--default-header-height));
 	margin-left: var(--side-bar-width);
 }
 
 .container {
-	background: white;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 20px;
@@ -17,6 +16,7 @@
 }
 
 .content {
+	color: var(--default-text-color);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

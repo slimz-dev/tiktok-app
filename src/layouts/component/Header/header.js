@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
@@ -11,7 +11,7 @@ import config from '~/config';
 import styles from './Header.module.scss';
 import { menuHeader, menuHeaderUser } from '~/data';
 import MenuItems from '~/layouts/component/Header/components/MenuItems';
-
+import { logged } from '~/services/loggedService';
 import AuthModal from '~/components/AuthModal';
 import { UserContext } from '~/context/UserProvider';
 import AuthProvider from '~/context/AuthProvider';
@@ -26,6 +26,16 @@ function Header() {
 	const navigate = useNavigate();
 	const [auth, setAuth] = useState(false);
 	const userState = useContext(UserContext);
+	const [avatar, setAvatar] = useState('');
+
+	useEffect(() => {
+		const getAvatar = async () => {
+			const result = await logged();
+			setAvatar(result.data.avatar);
+		};
+		getAvatar();
+	}, []);
+
 	function handleAuth() {
 		setAuth(true);
 	}
@@ -110,7 +120,7 @@ function Header() {
 									}}
 								>
 									<div className={cx('user-avatar')}>
-										<Img src="..." alt="avatar" />
+										<Img src={avatar} alt="avatar" />
 									</div>
 								</Tippy>
 							</>

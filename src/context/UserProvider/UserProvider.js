@@ -11,16 +11,15 @@ function UserProvider({ children }) {
 	);
 	useEffect(() => {
 		// Kiem tra expired
-		if (loggedIn) {
-			const fetchLogged = async () => {
-				const userToken = localStorage.getItem('token');
-				const response = await logged(userToken);
-				if (response === false) {
-					setLoggedIn(false);
-				}
-			};
-			fetchLogged();
-		}
+		// if (loggedIn) {
+		// 	const fetchLogged = async () => {
+		// 		const response = await logged();
+		// 		if (response === false) {
+		// 			setLoggedIn(false);
+		// 		}
+		// 	};
+		// 	fetchLogged();
+		// }
 
 		//Save token and state
 		localStorage.setItem('token', token);

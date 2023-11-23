@@ -10,7 +10,7 @@ function Img({ src, alt = 'picture', ...props }) {
 			loading="lazy"
 			src={
 				isError
-					? 'https://g.fp.ps.netease.com/market/file/60c96c4f143cfa876d229d29rZtiWmum03?fop=imageView/2/w/32/h/32'
+					? 'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg'
 					: src
 			}
 			alt={alt}

@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Theme } from '~/context/ThemeProvider';
 import FormUpload from './components/FormUpload';
 import NewUpload from './components/NewUpload';
-import AuthProvider from '~/context/AuthProvider';
 import AuthModal from '~/components/AuthModal';
 import { UserContext } from '~/context/UserProvider';
 export const FileContext = createContext();

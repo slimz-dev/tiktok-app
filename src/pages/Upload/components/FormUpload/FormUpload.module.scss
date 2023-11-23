@@ -1,4 +1,21 @@
-.wrapper {
+:root {
+	--input-color: white;
+	--input-border: rgba(22, 24, 35, 0.12);
+	--checked-icon-color: #050505;
+	--sub-heading-color: rgba(22, 24, 35, 0.5);
+	--button-cancel-hover: rgba(245, 245, 245, 1);
+}
+
+[data-theme='dark'] {
+	--input-color: #2f2f2f;
+	--input-border: rgb(116 113 113);
+	--checked-icon-color: white;
+	--sub-heading-color: rgb(121 114 114);
+	--button-cancel-hover: rgb(49 46 46);
+}
+
+.content {
+	color: var(--default-text-color);
 	display: flex;
 	flex-direction: column;
 }
@@ -9,7 +26,7 @@
 
 //Header
 .video-sub-heading {
-	color: rgba(22, 24, 35, 0.5);
+	color: var(--sub-heading-color);
 	font-weight: 400;
 }
 
@@ -35,7 +52,7 @@
 	width: 242px;
 	display: flex;
 	justify-content: space-between;
-	border: 1px solid rgba(22, 24, 35, 0.12);
+	border: 1px solid var(--input-border);
 	padding: 10px;
 	border-radius: 8px;
 }
@@ -51,6 +68,10 @@
 		font-size: 12px;
 		flex: 1;
 	}
+}
+
+.video-checked-icon {
+	color: var(--checked-icon-color);
 }
 
 .upload-button {
@@ -70,10 +91,12 @@
 	padding-top: 20px;
 	margin-left: 20px;
 	.video-description {
-		border: 1px solid rgba(22, 24, 35, 0.12);
+		border: 1px solid var(--input-border);
 		padding: 14px;
 		width: 100%;
 		border-radius: 5px;
+		background: var(--input-color);
+		color: var(--default-text-color);
 	}
 }
 
@@ -84,13 +107,12 @@
 	padding-bottom: 8px;
 }
 
-#view {
-	border: 1px solid rgba(22, 24, 35, 0.12);
-}
-
 .select-viewable {
 	width: 30%;
 	height: 36px;
+	border: 1px solid var(--input-border);
+	background: var(--default-background-color);
+	color: var(--default-text-color);
 }
 
 .allow-box {
@@ -115,7 +137,6 @@
 .submit {
 	display: flex;
 	justify-content: space-between;
-	width: 450px;
 	padding-top: 10px;
 }
 
@@ -124,7 +145,7 @@
 	align-items: center;
 	height: 46px;
 	border: 1px solid #ccc;
-	padding: 0px 80px;
+	padding: 0px 70px;
 
 	&:hover {
 		cursor: pointer;
@@ -132,7 +153,7 @@
 }
 
 .cancel-button:hover {
-	background: rgba(245, 245, 245, 1);
+	background: var(--button-cancel-hover);
 }
 .submit-button {
 	background: var(--primary);

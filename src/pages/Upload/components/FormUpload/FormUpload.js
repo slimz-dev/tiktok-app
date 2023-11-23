@@ -43,7 +43,13 @@ function FormUpload() {
 					allows: allow,
 					thumbnail_time: 5,
 				};
-				uploadVid(data);
+				const result = await uploadVid(data);
+				if (result === 'successfully uploaded') {
+					file.toasthandle('Video đã được upload thành công !');
+					setTimeout(() => {
+						handleCancel();
+					}, 1000);
+				}
 			} else if (videoSrc === undefined) {
 				file.toastHandle('Chưa có video nào được chọn !');
 			} else {
@@ -53,7 +59,7 @@ function FormUpload() {
 		fetchApi();
 	}
 	return (
-		<div className={cx('wrapper')}>
+		<div className={cx('content')}>
 			<div className={cx('video-header')}>
 				<h2 className={cx('video-heading')}>Tải video lên</h2>
 				<h3 className={cx('video-sub-heading')}>Đăng video vào tài khoản của bạn</h3>
@@ -76,12 +82,15 @@ function FormUpload() {
 						type="file"
 						id="files"
 						accept="video/mp4,video/x-m4v,video/*"
-						className={cx('hidden', 'hi')}
+						className={cx('hidden')}
 						onChange={file.handleCheckFile}
 					></input>
 					<div className={cx('video-option')}>
 						<div className={cx('video-verified')}>
-							<FontAwesomeIcon icon={faCheckCircle} color="#050505"></FontAwesomeIcon>
+							<FontAwesomeIcon
+								icon={faCheckCircle}
+								className={cx('video-checked-icon')}
+							></FontAwesomeIcon>
 							<span className={cx('video-name')}>
 								{uploadVideo ? uploadVideo.name : ''}
 							</span>
@@ -106,7 +115,7 @@ function FormUpload() {
 						<label className={cx('video-viewable')} htmlFor="view">
 							Ai có thể xem video này
 						</label>
-						<select ref={viewRef} id="view" className={cx('select-viewable')}>
+						<select ref={viewRef} className={cx('select-viewable')}>
 							<option value="public">Công khai</option>
 							<option value="friends">Bạn bè</option>
 							<option value="private">Riêng tư</option>
