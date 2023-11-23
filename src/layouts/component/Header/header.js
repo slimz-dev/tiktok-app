@@ -1,11 +1,13 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
+import config from '~/config';
 import styles from './Header.module.scss';
 import { menuHeader, menuHeaderUser } from '~/data';
 import MenuItems from '~/layouts/component/Header/components/MenuItems';
@@ -21,33 +23,38 @@ import { Icon } from '~/Icons';
 const cx = classNames.bind(styles);
 
 function Header() {
+	const navigate = useNavigate();
 	const [auth, setAuth] = useState(false);
 	const userState = useContext(UserContext);
 	function handleAuth() {
 		setAuth(true);
-		document.body.style.overflow = 'hidden';
+	}
+	function handleUpload() {
+		if (userState.loggedIn) {
+			navigate(config.routes.Upload);
+		} else {
+			handleAuth();
+		}
 	}
 
-	const authModal = {
-		auth,
+	const closeModal = {
 		handleClose: () => {
 			setAuth(false);
-			document.body.style.overflow = 'auto';
 		},
 	};
 
 	return (
-		<AuthProvider value={authModal}>
+		<AuthProvider value={closeModal}>
 			<header className={cx('wrapper')}>
 				<div className={cx('wrapper-content')}>
-					<Link to="/" className={cx('header-logo')}>
+					<Link to={config.routes.Home[0]} className={cx('header-logo')}>
 						<span className={cx('logo')}>
 							<Icon.Logo />
 						</span>
 					</Link>
 					<HeaderSearch />
 					<div className={cx('header-other')}>
-						<button className={cx('upload-container')}>
+						<button className={cx('upload-container')} onClick={handleUpload}>
 							<FontAwesomeIcon icon={faPlus} className={cx('plus-icon')} />
 							<span className={cx('plus')}>Tải lên</span>
 						</button>

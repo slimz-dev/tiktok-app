@@ -1,0 +1,146 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.hidden {
+	display: none;
+}
+
+//Header
+.video-sub-heading {
+	color: rgba(22, 24, 35, 0.5);
+	font-weight: 400;
+}
+
+//Body
+.video-container {
+	display: flex;
+	flex-direction: row;
+}
+
+//Left-side
+.video-content {
+	padding: 20px 0px;
+}
+
+.video-render {
+	width: 240px;
+	height: 468px;
+	border-radius: 8px;
+	border: 3px solid;
+}
+
+.video-option {
+	width: 242px;
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid rgba(22, 24, 35, 0.12);
+	padding: 10px;
+	border-radius: 8px;
+}
+
+.video-verified {
+	display: flex;
+	width: 120px;
+	.video-name {
+		padding-left: 6px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		font-size: 12px;
+		flex: 1;
+	}
+}
+
+.upload-button {
+	font-size: 14px;
+	font-weight: 600;
+	&:hover {
+		text-decoration: underline;
+		cursor: pointer;
+	}
+}
+
+//Right-side
+.setting {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding-top: 20px;
+	margin-left: 20px;
+	.video-description {
+		border: 1px solid rgba(22, 24, 35, 0.12);
+		padding: 14px;
+		width: 100%;
+		border-radius: 5px;
+	}
+}
+
+.video-description-label,
+.video-viewable,
+.video-allow {
+	font-weight: 600;
+	padding-bottom: 8px;
+}
+
+#view {
+	border: 1px solid rgba(22, 24, 35, 0.12);
+}
+
+.select-viewable {
+	width: 30%;
+	height: 36px;
+}
+
+.allow-box {
+	display: flex;
+	justify-content: space-between;
+	width: 300px;
+}
+
+.input-checkbox {
+	margin-right: 10px;
+}
+
+.setting-option {
+	display: flex;
+	flex-direction: column;
+}
+
+.setting-option + .setting-option {
+	padding-top: 20px;
+}
+
+.submit {
+	display: flex;
+	justify-content: space-between;
+	width: 450px;
+	padding-top: 10px;
+}
+
+.event-button {
+	display: flex;
+	align-items: center;
+	height: 46px;
+	border: 1px solid #ccc;
+	padding: 0px 80px;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.cancel-button:hover {
+	background: rgba(245, 245, 245, 1);
+}
+.submit-button {
+	background: var(--primary);
+	color: white;
+	font-weight: 600;
+	font-size: 18px;
+
+	&:hover {
+		background: rgba(234, 40, 78, 1);
+	}
+}

@@ -1,14 +1,10 @@
-.wrapper {
-	height: var(--default-layout-height);
-}
-
 .container {
 	display: flex;
 	margin-top: var(--default-header-height);
 }
 
 .content {
-	background-color: var(--default-background-color);
+	background: var(--default-background-color);
 	display: flex;
 	flex: 1;
 	justify-content: center;
