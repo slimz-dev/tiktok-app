@@ -1,5 +1,4 @@
 import { useState, useEffect, createContext } from 'react';
-import { logged } from '~/services/loggedService';
 
 export const UserContext = createContext();
 function UserProvider({ children }) {
@@ -23,7 +22,7 @@ function UserProvider({ children }) {
 
 		//Save token and state
 		localStorage.setItem('token', token);
-		localStorage.setItem('user', JSON.stringify(loggedIn));
+		localStorage.setItem('user', loggedIn);
 	}, [loggedIn, token]);
 	const userState = {
 		loggedIn,

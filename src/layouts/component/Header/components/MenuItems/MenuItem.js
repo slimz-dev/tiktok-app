@@ -29,9 +29,8 @@ function MenuItems({ data }) {
 	const menuRender = menu[menu.length - 1];
 	useEffect(() => {
 		if (isLogout === true) {
-			console.log(userContext.token);
 			const logOutApi = async () => {
-				const response = await logOut(userContext.token);
+				const response = await logOut();
 				if (response === undefined) {
 					userContext.setLoggedIn(false);
 				}

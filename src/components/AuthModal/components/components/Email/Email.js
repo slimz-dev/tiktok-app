@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,6 +14,7 @@ import styles from './Email.module.scss';
 const cx = classNames.bind(styles);
 
 function Email() {
+	const modalRef = useRef();
 	const userCookie = useContext(UserContext);
 	const Auth = useContext(AuthContext);
 	const themeContext = useContext(Theme);
@@ -57,10 +58,16 @@ function Email() {
 		} else if (isSubmit) {
 			const fetchUser = async () => {
 				try {
+					const result = await userLogin(data);
+					userCookie.setToken(result.token);
+					setTimeout(() => {
+						userCookie.setLoggedIn(true);
+						Auth.handleClose();
+					}, 1500);
 					toast('Đăng nhập thành công', {
 						icon: '🚀',
 						position: 'top-center',
-						autoClose: 5000,
+						autoClose: 1000,
 						hideProgressBar: false,
 						closeOnClick: true,
 						pauseOnHover: false,
@@ -68,13 +75,10 @@ function Email() {
 						progress: undefined,
 						theme: themeContext.theme,
 					});
-					const result = await userLogin(data);
-					userCookie.setToken(result.token);
-					userCookie.setLoggedIn(true);
 				} catch (err) {
 					let errMsg;
 					if (err.response?.status === 401) {
-						errMsg = 'Đăng nhập có lỗi !';
+						errMsg = 'Sai email hoặc mật khẩu !';
 					} else if (err.response?.status === 422) {
 						errMsg = 'Vui lòng nhập đúng email';
 					} else {
@@ -116,7 +120,7 @@ function Email() {
 		}
 	}
 	return (
-		<div className={cx('wrapper')}>
+		<div ref={modalRef} className={cx('wrapper')}>
 			<div className={cx('login-container')}>
 				<input
 					value={data.email}

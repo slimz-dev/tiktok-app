@@ -6,17 +6,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Theme } from '~/context/ThemeProvider';
 import FormUpload from './components/FormUpload';
 import NewUpload from './components/NewUpload';
-import AuthModal from '~/components/AuthModal';
-import { UserContext } from '~/context/UserProvider';
+
 export const FileContext = createContext();
 const cx = classNames.bind(styles);
 
 function Upload() {
 	const themeContext = useContext(Theme);
-	const userState = useContext(UserContext);
 	const [isVid, setIsVid] = useState(false);
 	const vidRef = useRef();
-
 	function toastHandle(errMsg) {
 		toast(errMsg, {
 			icon: '🚀',
@@ -69,7 +66,6 @@ function Upload() {
 				<div className={cx('container')}>{isVid ? <FormUpload /> : <NewUpload />}</div>
 			</FileContext.Provider>
 			<ToastContainer />
-			{!userState.loggedIn && <AuthModal />}
 		</div>
 	);
 }

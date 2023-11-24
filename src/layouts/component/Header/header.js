@@ -26,15 +26,19 @@ function Header() {
 	const navigate = useNavigate();
 	const [auth, setAuth] = useState(false);
 	const userState = useContext(UserContext);
-	const [avatar, setAvatar] = useState('');
-
+	const [avatar, setAvatar] = useState(null);
 	useEffect(() => {
 		const getAvatar = async () => {
-			const result = await logged();
-			setAvatar(result.data.avatar);
+			if (userState.loggedIn) {
+				const result = await logged();
+				console.log(result);
+				if (result !== null) {
+					setAvatar(result.data.avatar);
+				}
+			}
 		};
 		getAvatar();
-	}, []);
+	}, [userState.loggedIn]);
 
 	function handleAuth() {
 		setAuth(true);
