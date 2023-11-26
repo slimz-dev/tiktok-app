@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
 
@@ -11,15 +11,10 @@ const cx = classNames.bind(styles);
 function Home() {
 	const [vid, setVid] = useState([]);
 	const [page, setPage] = useState(1);
-	const [length, setLength] = useState('');
 	const data = {
 		page: {
 			page,
 			setPage,
-		},
-		length: {
-			length,
-			setLength,
 		},
 	};
 	useEffect(() => {
@@ -27,7 +22,6 @@ function Home() {
 			try {
 				const result = await videoList(page);
 				setVid((prev) => [...prev, ...result.data]);
-				setLength(result.meta.pagination.per_page);
 			} catch (e) {
 				console.log(e);
 			}
