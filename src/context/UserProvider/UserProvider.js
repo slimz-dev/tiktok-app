@@ -8,6 +8,7 @@ function UserProvider({ children }) {
 	const [token, setToken] = useState(
 		localStorage.getItem('token') ? localStorage.getItem('token') : ''
 	);
+
 	useEffect(() => {
 		// Kiem tra expired
 		// if (loggedIn) {

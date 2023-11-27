@@ -1,11 +1,13 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './Sidebar.module.scss';
-
+import { UserContext } from '~/context/UserProvider';
 import { Icon } from '~/Icons';
 import config from '~/config';
 const cx = classNames.bind(styles);
 function Sidebar() {
+	const userState = useContext(UserContext);
 	return (
 		<nav className={cx('wrapper')}>
 			<ul className={cx('nav-container')}>
@@ -54,13 +56,17 @@ function Sidebar() {
 					<span className={cx('title')}>LIVE</span>
 				</NavLink>
 			</ul>
-			<div className={cx('login-box')}>
-				<p className={cx('comment')}>
-					Đăng nhập để follow các tác giả, thích video và xem bình luận.
-				</p>
-				<button className={cx('login')}>Đăng nhập</button>
-				<div className={cx('placeholder')}></div>
-			</div>
+			{!userState.loggedIn ? (
+				<div className={cx('login-box')}>
+					<p className={cx('comment')}>
+						Đăng nhập để follow các tác giả, thích video và xem bình luận.
+					</p>
+					<button className={cx('login')}>Đăng nhập</button>
+					<div className={cx('placeholder')}></div>
+				</div>
+			) : (
+				''
+			)}
 			<footer className={cx('footer')}>
 				<div className={cx('footer-link')}>
 					<a href="#a">Giới thiệu</a>

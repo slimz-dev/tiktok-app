@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
-
 import PageProvider from './context/PageContext';
 import { videoList } from '~/services/videoService';
 import Video from './component/Video';
@@ -28,6 +27,7 @@ function Home() {
 		};
 		fetchVideo();
 	}, [page]);
+
 	return (
 		<div className={cx('wrapper')}>
 			<PageProvider value={data}>

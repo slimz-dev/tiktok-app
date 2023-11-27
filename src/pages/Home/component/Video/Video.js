@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { InView } from 'react-intersection-observer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,13 +6,13 @@ import { faHeart, faCommentDots, faShare } from '@fortawesome/free-solid-svg-ico
 import { faSoundcloud } from '@fortawesome/free-brands-svg-icons';
 import classNames from 'classnames/bind';
 
+import { handleLike } from '~/services/likeService';
 import { PageContext } from '../../context/PageContext';
 import styles from './Video.module.scss';
 import Img from '~/components/Img';
-
 const cx = classNames.bind(styles);
 function Video({ arrayList }) {
-	let runTime = 0;
+	const [like, setLike] = useState();
 	const vidRef = useRef([]);
 	const vid = useContext(PageContext);
 	function handleNext() {
@@ -23,15 +23,19 @@ function Video({ arrayList }) {
 	function handleAutoPlay(inView, entry) {
 		const currentVideo = entry.target.firstChild.id;
 		if (inView) {
-			if (runTime > 0) {
-				vidRef.current[currentVideo].muted = false;
-			}
 			vidRef.current[currentVideo].play();
-			runTime++;
 		} else {
 			vidRef.current[currentVideo].pause();
 			vidRef.current[currentVideo].muted = true;
 		}
+	}
+
+	function handleLikeVideo(videoID) {
+		const fetchLike = async () => {
+			const result = await handleLike(videoID);
+			setLike(result);
+		};
+		fetchLike();
 	}
 
 	return (
@@ -92,10 +96,26 @@ function Video({ arrayList }) {
 								</video>
 							</div>
 							<div className={cx('video-button')}>
-								<div className={cx('button')}>
-									<FontAwesomeIcon icon={faHeart} className={cx('icon')} />
-									<span className={cx('number')}>{item.likes_count}</span>
+								<div
+									className={cx('button')}
+									onClick={() => handleLikeVideo(item.id, item.is_liked)}
+								>
+									<FontAwesomeIcon
+										icon={faHeart}
+										className={cx('icon', {
+											liked_color:
+												like && like.id === item.id
+													? like.is_liked
+													: item.is_liked,
+										})}
+									/>
+									<span className={cx('number')}>
+										{like && like.id === item.id
+											? like.likes_count
+											: item.likes_count}
+									</span>
 								</div>
+
 								<div className={cx('button')}>
 									<FontAwesomeIcon icon={faCommentDots} className={cx('icon')} />
 									<span className={cx('number')}>{item.comments_count}</span>

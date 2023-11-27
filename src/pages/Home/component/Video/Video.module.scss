@@ -128,6 +128,10 @@
 	padding: 14px;
 }
 
+.liked_color {
+	color: var(--primary);
+}
+//Tiktok loading more video
 .loading {
 	$animation-duration: 1200ms;
 	display: flex;

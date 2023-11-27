@@ -34,6 +34,7 @@ function MenuItems({ data }) {
 				if (response === undefined) {
 					userContext.setLoggedIn(false);
 				}
+				window.location.reload();
 			};
 			logOutApi();
 		}

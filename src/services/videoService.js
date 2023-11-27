@@ -6,6 +6,9 @@ export const videoList = async (page = '1', type = 'for-you') => {
 			type,
 			page,
 		},
+		headers: {
+			Authorization: `Bearer ${localStorage.getItem('token')}`,
+		},
 	});
 	return result.data;
 };
