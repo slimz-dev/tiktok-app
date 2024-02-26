@@ -11,7 +11,6 @@ import { Icon } from '~/Icons';
 const cx = classNames.bind(styles);
 
 function AuthModal() {
-	const userCookie = useContext(UserContext);
 	const [register, setRegister] = useState(false);
 	const transferTitle = register === false ? 'Bạn không có tài khoản?' : 'Bạn đã có tài khoản?';
 	const buttonName = register === false ? 'Đăng ký' : 'Đăng nhập';

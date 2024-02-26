@@ -7,29 +7,27 @@ import { Icon } from '~/Icons';
 import Phone from '../components/Phone';
 import Email from '../components/Email';
 import Qr from './Qr';
+import { closeModalContext } from '~/context/CloseLoginModalProvider';
 
 const cx = classNames.bind(styles);
 
 function Login() {
 	const [option, setOption] = useState({ select: 'phone' });
-	const toggleModal = useContext(AuthContext);
+	const modalHandler = useContext(closeModalContext);
 	function handleChoose(e) {
 		e.preventDefault();
 		const selectedOption = e.target.id;
 		setOption({ select: selectedOption });
 	}
-
 	return (
 		<>
 			<header className={cx('header')}>
 				<span className={cx('title')}>Đăng nhập vào Tiktok</span>
-				{toggleModal ? (
-					<span className={cx('clear-button')} onClick={toggleModal.handleClose}>
-						<Icon.ClearButton width="32px" height="32px" />
-					</span>
-				) : (
-					''
-				)}
+
+				<span className={cx('clear-button')} onClick={modalHandler.handleClose}>
+					<Icon.ClearButton width="32px" height="32px" />
+				</span>
+
 				<div className={cx('log-container')}>
 					<button
 						id="phone"

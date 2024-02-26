@@ -6,13 +6,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './components/GlobalStyles';
+import CloseLoginModalProvider from './context/CloseLoginModalProvider';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
 	<BrowserRouter>
 		<GlobalStyles>
 			<ThemeProvider>
-				<App />
+				<CloseLoginModalProvider>
+					<App />
+				</CloseLoginModalProvider>
 			</ThemeProvider>
 		</GlobalStyles>
 	</BrowserRouter>

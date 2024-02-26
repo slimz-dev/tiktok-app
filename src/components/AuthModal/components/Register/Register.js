@@ -6,12 +6,13 @@ import { AuthContext } from '~/context/AuthProvider';
 import Phone from '../components/Phone';
 import Email from '../components/Email';
 import styles from '../../AuthModal.module.scss';
+import { closeModalContext } from '~/context/CloseLoginModalProvider';
 
 const cx = classNames.bind(styles);
 
 function Logout() {
 	const [option, setOption] = useState({ select: 'phone' });
-	const Auth = useContext(AuthContext);
+	const modalHandler = useContext(closeModalContext);
 
 	function handleChoose(e) {
 		e.preventDefault();
@@ -23,7 +24,7 @@ function Logout() {
 		<>
 			<header className={cx('header')}>
 				<span className={cx('title')}>Đăng ký TikTok</span>
-				<span className={cx('clear-button')} onClick={Auth.handleClose}>
+				<span className={cx('clear-button')} onClick={modalHandler.handleClose}>
 					<Icon.ClearButton width="32px" height="32px" />
 				</span>
 				<div className={cx('log-container')}>
