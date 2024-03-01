@@ -7,7 +7,7 @@
 .content {
 	display: flex;
 	flex: 1;
-	justify-content: center;
+	margin-left: var(--side-bar-width);
 }
 
 .scroll-to-top {

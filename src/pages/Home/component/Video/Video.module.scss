@@ -1,11 +1,17 @@
 :root {
 	--button-bg: rgba(22, 24, 35, 0.06);
 	--number-color: rgba(22, 24, 35, 0.75);
+	--follow-border-color: #e3e3e3;
+	--follow-bg-color: whitesmoke;
+	--follow-border-color-hover: #e3e3e3;
 }
 
 [data-theme='dark'] {
 	--button-bg: rgb(47 47 47);
 	--number-color: white;
+	--follow-bg-color: rgb(47 47 47);
+	--follow-border-color: rgb(255 255 255 / 12%);
+	--follow-border-color-hover: black;
 }
 
 .container {
@@ -127,7 +133,14 @@
 	border-radius: 50%;
 	padding: 14px;
 }
-
+.followed {
+	color: var(--text-color) !important;
+	border-color: var(--follow-border-color) !important;
+	&:hover {
+		background-color: var(--follow-bg-color) !important;
+		border-color: var(--follow-border-color-hover) !important;
+	}
+}
 .liked_color {
 	color: var(--primary);
 }

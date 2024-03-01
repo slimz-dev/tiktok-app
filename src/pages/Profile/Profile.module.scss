@@ -1,0 +1,93 @@
+.wrapper {
+	margin-top: 30px;
+}
+
+.info-container {
+	max-width: 624px;
+}
+.info-header {
+	display: flex;
+	.user-avatar {
+		width: 116px;
+		height: 116px;
+	}
+	.basic-info {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		margin-left: 10px;
+		.user-username {
+			font-size: 2em;
+		}
+		.user-name {
+			margin-bottom: 10px;
+			font-size: 1.2em;
+			font-weight: 500;
+		}
+		.follow-button {
+			background-color: var(--primary);
+			color: white;
+			padding: 8px 80px;
+			border-radius: 5px;
+			text-align: center;
+			font-weight: 500;
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+.info-description {
+	margin-top: 20px;
+	.info-influent {
+		display: flex;
+		justify-content: space-between;
+		max-width: 350px;
+
+		.influent-container {
+			.influent-number {
+				font-weight: 700;
+				font-size: 1.2em;
+				margin-right: 5px;
+			}
+			.influent-type {
+				color: rgb(22 24 35 / 75%);
+			}
+		}
+	}
+	.user-description {
+		margin-top: 5px;
+	}
+}
+
+.info-view {
+	width: 100%;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+	max-width: 880px;
+	border-bottom: 1px solid #ccc;
+}
+
+.view-container {
+	display: flex;
+	padding-bottom: 8px;
+}
+.view-content {
+	font-size: 1.2em;
+	width: 120px;
+	text-align: center;
+	cursor: pointer;
+	color: rgb(115, 116, 123);
+}
+
+.active {
+	color: black;
+	font-weight: 600;
+}
+.view-line {
+	width: 120px;
+	height: 2px;
+	background-color: black;
+}

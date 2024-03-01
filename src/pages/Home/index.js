@@ -15,6 +15,9 @@ function Home() {
 			page,
 			setPage,
 		},
+		action: {
+			setVid,
+		},
 	};
 	useEffect(() => {
 		const fetchVideo = async () => {

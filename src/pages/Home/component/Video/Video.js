@@ -14,12 +14,12 @@ import Swal from 'sweetalert2';
 import { UserContext } from '~/context/UserProvider';
 import AuthModal from '~/components/AuthModal';
 import { closeModalContext } from '~/context/CloseLoginModalProvider';
+import { handleFollow } from '~/services/followService';
 const cx = classNames.bind(styles);
 function Video({ arrayList }) {
+	const [errorVid, setErrorVid] = useState([]);
 	const user = useContext(UserContext);
 	const loginModalHandler = useContext(closeModalContext);
-	const [login, setLogin] = useState(false);
-	const [like, setLike] = useState();
 	const vidRef = useRef([]);
 	const vid = useContext(PageContext);
 	function handleNext() {
@@ -44,24 +44,57 @@ function Video({ arrayList }) {
 	function handleAutoPlay(inView, entry) {
 		const currentVideo = entry.target.firstChild.id;
 		if (inView) {
-			vidRef.current[currentVideo].play();
-		} else {
-			if (vidRef.current[currentVideo].currentTime !== 0) {
-				vidRef.current[currentVideo].pause();
+			if (!errorVid.includes(vidRef.current[currentVideo].id)) {
+				vidRef.current[currentVideo].play();
 			}
+		} else {
+			vidRef.current[currentVideo].pause();
 		}
 	}
 
 	function handleLikeVideo(videoID) {
 		const fetchLike = async () => {
 			const result = await handleLike(videoID);
-			setLike(result);
+			vid.action.setVid((prev) => {
+				const arrayOfList = prev.slice();
+				const indexOfVideo = arrayOfList.findIndex((video) => {
+					return video.id === result.id;
+				});
+				arrayOfList.splice(indexOfVideo, 1, result);
+				return arrayOfList;
+			});
 		};
 		if (user.loggedIn) {
 			fetchLike();
 		} else {
 			loginModalHandler.handleOpen();
 		}
+	}
+
+	function handleFollowUser(userId, isFollowed) {
+		const fetchFollow = async () => {
+			const result = await handleFollow(userId, isFollowed);
+			vid.action.setVid((prev) => {
+				const arrayOfList = prev.map((video) => {
+					if (video.user_id === userId) {
+						return {
+							...video,
+							user: result,
+						};
+					}
+					return video;
+				});
+				return arrayOfList;
+			});
+		};
+		if (user.loggedIn) {
+			fetchFollow();
+		} else {
+			loginModalHandler.handleOpen();
+		}
+	}
+	function handleError(vid) {
+		setErrorVid((prev) => [...prev, vid.toString()]);
 	}
 
 	return (
@@ -110,7 +143,16 @@ function Video({ arrayList }) {
 										</div>
 									)}
 								</div>
-								<button className={cx('follow-button')}>Follow</button>
+								<button
+									className={cx('follow-button', {
+										followed: item.user.is_followed,
+									})}
+									onClick={() => {
+										handleFollowUser(item.user_id, item.user.is_followed);
+									}}
+								>
+									{item.user.is_followed ? 'Following' : 'Follow'}
+								</button>
 							</div>
 							<div className={cx('content')}>
 								<div className={cx('video')}>
@@ -120,6 +162,7 @@ function Video({ arrayList }) {
 										loop
 										muted
 										ref={(element) => (vidRef.current[item.id] = element)}
+										onError={() => handleError(item.id)}
 									>
 										<source src={item.file_url} type="video/mp4" />
 									</video>
@@ -132,17 +175,10 @@ function Video({ arrayList }) {
 										<FontAwesomeIcon
 											icon={faHeart}
 											className={cx('icon', {
-												liked_color:
-													like && like.id === item.id
-														? like.is_liked
-														: item.is_liked,
+												liked_color: item.is_liked,
 											})}
 										/>
-										<span className={cx('number')}>
-											{like && like.id === item.id
-												? like.likes_count
-												: item.likes_count}
-										</span>
+										<span className={cx('number')}>{item.likes_count}</span>
 									</div>
 
 									<div className={cx('button')}>
