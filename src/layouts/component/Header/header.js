@@ -11,7 +11,7 @@ import config from '~/config';
 import styles from './Header.module.scss';
 import { menuHeader, menuHeaderUser } from '~/data';
 import MenuItems from '~/layouts/component/Header/components/MenuItems';
-import { logged } from '~/services/loggedService';
+import { logged } from '~/services/Auth/loggedService';
 import AuthModal from '~/components/AuthModal';
 import { UserContext } from '~/context/UserProvider';
 import AuthProvider from '~/context/AuthProvider';
@@ -27,14 +27,17 @@ function Header() {
 	const navigate = useNavigate();
 	const loginModalHandler = useContext(closeModalContext);
 	const userState = useContext(UserContext);
+	const [nickname, setNickname] = useState('');
 	const [avatar, setAvatar] = useState(null);
 	useEffect(() => {
 		const getAvatar = async () => {
 			if (userState.loggedIn) {
 				const result = await logged();
-				console.log(result);
 				if (result !== null) {
-					setAvatar(result.data.avatar);
+					setAvatar(() => {
+						setNickname(result.data.nickname);
+						return result.data.avatar;
+					});
 				}
 			}
 		};
@@ -114,7 +117,7 @@ function Header() {
 								interactive
 								placement="bottom-end"
 								render={(attrs) => {
-									return <MenuItems data={menuHeaderUser} />;
+									return <MenuItems thisUser={nickname} data={menuHeaderUser} />;
 								}}
 							>
 								<div className={cx('user-avatar')}>

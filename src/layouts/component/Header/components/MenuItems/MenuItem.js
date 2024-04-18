@@ -5,11 +5,12 @@ import classNames from 'classnames/bind';
 
 import { Theme } from '~/context/ThemeProvider';
 import { UserContext } from '~/context/UserProvider';
-import { logOut } from '~/services/logoutService';
+import { logOut } from '~/services/Auth/logoutService';
 import styles from './MenuItems.module.scss';
 import TyppyWrapper from '~/layouts/component/TyppyWrapper';
 import Button from '~/components/Button/Button';
 import Icon from '~/components/Icon';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -21,7 +22,8 @@ function check(data) {
 	}
 }
 
-function MenuItems({ data }) {
+function MenuItems({ thisUser, data }) {
+	const navigate = useNavigate();
 	const themeContext = useContext(Theme);
 	const userContext = useContext(UserContext);
 	const [isLogout, setIsLogout] = useState(false);
@@ -79,6 +81,9 @@ function MenuItems({ data }) {
 										'separator-line': menu.separator,
 									})}
 									onClick={() => {
+										if (menu.title === 'Xem hồ sơ') {
+											navigate(`/@${thisUser}`);
+										}
 										if (menu.title === 'Đăng xuất') {
 											setIsLogout(true);
 										}

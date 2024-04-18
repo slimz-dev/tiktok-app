@@ -1,9 +1,17 @@
 .wrapper {
 	margin-top: 30px;
+	width: 100%;
 }
 
 .info-container {
 	max-width: 624px;
+}
+
+.img-sizing {
+	width: 100%;
+	border-radius: 50%;
+	height: 100%;
+	object-fit: cover;
 }
 .info-header {
 	display: flex;
@@ -38,14 +46,35 @@
 	}
 }
 
+.edit-button {
+	border: 1px solid rgb(22 24 35 / 12%);
+	padding: 8px 24px;
+	width: fit-content;
+	font-weight: 600;
+	&:hover {
+		cursor: pointer;
+		border-color: rgb(208, 209, 211);
+		background-color: rgb(248, 248, 248);
+	}
+}
+
+.edit-content {
+	margin-left: 6px;
+}
+
+.is-followed {
+	color: var(--primary) !important;
+	background-color: white !important;
+	border: 1px solid var(--primary);
+}
 .info-description {
 	margin-top: 20px;
 	.info-influent {
 		display: flex;
-		justify-content: space-between;
 		max-width: 350px;
 
 		.influent-container {
+			margin-right: 14px;
 			.influent-number {
 				font-weight: 700;
 				font-size: 1.2em;
@@ -66,7 +95,6 @@
 	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
-	max-width: 880px;
 	border-bottom: 1px solid #ccc;
 }
 

@@ -1,0 +1,39 @@
+.content-header {
+	display: flex;
+}
+
+.title {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	text-align: center;
+	font-size: 14px;
+	color: rgb(22 24 35 / 60%);
+	font-weight: 700;
+}
+.content-header-wrapper {
+	position: relative;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.line {
+	width: 100%;
+	background: black;
+	height: 2px;
+	border-radius: 5px;
+}
+.active {
+	color: black;
+}
+.title-name {
+	height: 24px;
+}
+.content-line {
+	position: absolute;
+	height: 1px;
+	width: calc(100% + 48px);
+	background: rgb(22 24 35 / 12%);
+	margin-left: -24px;
+}

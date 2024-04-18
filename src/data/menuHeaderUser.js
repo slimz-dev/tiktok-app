@@ -5,7 +5,6 @@ const menuHeaderUser = [
 	{
 		icon: Icon.User,
 		title: 'Xem hồ sơ',
-		href: 'https://www.tiktok.com/live/creators/vi-VN/?enter_from=more&lang=vi-VN&region=VN',
 	},
 	{
 		icon: Icon.Favorite,

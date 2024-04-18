@@ -1,0 +1,102 @@
+.video-header-wrapper {
+	background: rgb(22 24 35 / 3%);
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 12px;
+}
+
+.video-header-top {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.video-author-info {
+	display: flex;
+	flex-direction: row;
+}
+
+.video-author-avatar {
+	width: 40px;
+	height: 40px;
+}
+
+.video-author-name {
+	margin-left: 8px;
+}
+
+.video-author-username {
+	font-size: 18px;
+	font-weight: 500;
+	&:hover {
+		cursor: pointer;
+		text-decoration: underline;
+	}
+}
+
+.video-author-name {
+	font-size: 14px;
+}
+
+.video-date {
+	margin-left: 6px;
+}
+
+.video-description {
+	margin-top: 10px;
+	margin-bottom: 8px;
+}
+
+.video-action {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 50%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.action-container {
+	display: flex;
+	align-items: center;
+}
+
+.follow-button {
+	background: var(--primary);
+	color: white;
+	padding: 10px 22px;
+	font-weight: 600;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.followed {
+	background: white;
+	color: black;
+	border: 1px solid rgb(22 24 35 / 12%);
+}
+
+.icon-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgb(22 24 35 / 6%);
+	padding: 5px;
+	border-radius: 50%;
+}
+
+.liked {
+	color: var(--primary);
+}
+
+.like-icon {
+	cursor: pointer;
+}
+
+.num-wrapper {
+	margin-left: 8px;
+	font-size: 14px;
+	font-weight: 700;
+}

@@ -1,0 +1,154 @@
+.wrapper {
+	position: fixed;
+	z-index: 5;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background-color: rgb(0 0 0 / 50%);
+}
+
+.modal-container {
+	display: flex;
+	flex-direction: column;
+	width: 700px;
+	height: 700px;
+	background: white;
+	margin: auto;
+	top: 10%;
+	position: relative;
+	padding: 20px 0px;
+	border-radius: 5px;
+}
+
+.modal-header {
+	display: flex;
+	flex-direction: row;
+	height: 60px;
+	padding: 0px 20px;
+	border-bottom: 0.5px solid rgba(22, 24, 35, 0.2);
+	align-items: center;
+}
+
+.header-name {
+	font-weight: 500;
+	font-size: 24px;
+	flex: 1;
+}
+
+.header-button {
+	padding: 0;
+	font-size: 24px;
+	margin-right: 20px;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.modal-content {
+	padding: 0px 20px;
+}
+.content-section {
+	padding: 16px 0px;
+	border-bottom: 0.5px solid rgba(22, 24, 35, 0.2);
+	display: flex;
+	align-items: flex-start;
+	.section-name {
+		font-weight: 600;
+		margin-right: 50px;
+		width: 120px;
+	}
+
+	.section-input {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+
+		.file-input {
+			display: none;
+		}
+		.input {
+			width: 360px;
+			height: 38px;
+			border-radius: 4px;
+			background: rgba(22, 24, 35, 0.06);
+			caret-color: rgb(254, 44, 85);
+			padding: 12px;
+		}
+		.section-description {
+			margin-top: 5px;
+			display: flex;
+			flex-direction: column;
+			font-size: 12px;
+			color: rgb(0 0 0 / 75%);
+			line-height: 18px;
+			max-width: 360px;
+		}
+	}
+}
+
+.bottom-section {
+	border-bottom: none;
+}
+
+.img-wrapper {
+	position: relative;
+	width: 360px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.img-sizing {
+	width: 96px;
+	height: 96px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.img-button {
+	position: absolute;
+	bottom: 0px;
+	right: 136px;
+	border: 1px solid rgb(208, 208, 211);
+	background: white;
+	border-radius: 50%;
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal-footer {
+	display: flex;
+	border-top: 0.5px solid rgba(22, 24, 35, 0.2);
+	padding: 0px 20px;
+	flex-direction: row;
+	justify-content: flex-end;
+	flex: 1;
+}
+
+.button-wrapper {
+	display: flex;
+	margin-top: 16px;
+	align-items: center;
+
+	.button {
+		border: 1px solid rgb(22 24 35 / 12%);
+		padding: 6px 20px;
+		border-radius: 5px;
+		margin-right: 10px;
+		width: 100px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: 600;
+	}
+}
+
+.username-input {
+	caret-color: transparent !important;
+	&:hover {
+		cursor: not-allowed;
+	}
+}

@@ -1,4 +1,4 @@
-const routes = {
+export const routes = {
 	Home: ['/', '/home', '/foryou'],
 	Following: '/following',
 	Upload: '/upload',
@@ -6,4 +6,6 @@ const routes = {
 	Unknown: '/404',
 };
 
-export default routes;
+export const childRoutes = {
+	Video: `${routes.Profile}/video/:videoId`,
+};

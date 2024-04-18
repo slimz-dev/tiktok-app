@@ -6,8 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Theme } from '~/context/ThemeProvider';
 import { UserContext } from '~/context/UserProvider';
 import { RegisterContext } from '~/context/RegisterProvider';
-import { userLogin } from '~/services/userService';
-import { userRegistration } from '~/services/registerService';
+import { userLogin } from '~/services/Auth/userService';
+import { userRegistration } from '~/services/Auth/registerService';
 import styles from './Email.module.scss';
 
 const cx = classNames.bind(styles);

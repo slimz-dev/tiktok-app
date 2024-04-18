@@ -4,7 +4,7 @@ import styles from './FormUpload.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 import { FileContext } from '../../Upload';
-import { uploadVid } from '~/services/uploadService';
+import { uploadVid } from '~/services/Videos/uploadService';
 
 const cx = classNames.bind(styles);
 function FormUpload() {

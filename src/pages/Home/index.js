@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
 import PageProvider from './context/PageContext';
-import { videoList } from '~/services/videoService';
+import { videoList } from '~/services/Videos/videoService';
 import Video from './component/Video';
 
 const cx = classNames.bind(styles);

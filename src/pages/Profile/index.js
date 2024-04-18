@@ -1,12 +1,19 @@
-import { faLock, faStreetView } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import Img from '~/components/Img';
+import config from '~/config';
 import useClassName from '~/hooks/useClassName';
-import { getUser } from '~/services/getAnUserService';
+import { getUser } from '~/services/Users/getAnUserService';
+import { logged } from '~/services/Auth/loggedService';
+import MyLikedVids from './components/MyLikedVids/MyLikedVids';
+import MyVids from './components/MyVids/MyVids';
 import styles from './Profile.module.scss';
+import EditProfileModal from './components/EditProfileModal';
 function Profile() {
+	const navigate = useNavigate();
 	const [linePosition, setLinePosition] = useState(0);
 	const [view, setView] = useState(true);
 	const viewRef = useRef([]);
@@ -15,38 +22,57 @@ function Profile() {
 	const cx = useClassName(styles);
 	const id = useParams();
 	const [user, setUser] = useState({});
+	const [isMe, setIsMe] = useState(false);
+	const [isEdit, setIsEdit] = useState(false);
+
+	const editValue = {
+		isEdit,
+		setIsEdit,
+	};
 	useEffect(() => {
 		const fetchUser = async () => {
 			const result = await getUser(id.user);
-			setUser(result);
+			const me = await logged();
+			if (result !== null) {
+				setUser(() => {
+					if (me.data.id === result.id) {
+						setIsMe(true);
+					} else {
+						setIsMe(false);
+					}
+					return result;
+				});
+			} else {
+				navigate(config.routes.Unknown);
+			}
 		};
 		fetchUser();
-	}, []);
+	}, [id]);
+
 	function handleChangeLine(e) {
 		let thisElement = e.target;
-		while (!thisElement.classList.contains('pick')) {
+		while (!thisElement.classList.contains('tab')) {
 			thisElement = thisElement.parentNode;
 		}
-
 		const tempPosition = thisElement.offsetLeft - lineRef.current.offsetLeft;
 		lineRef.current.animate([{ transform: `translateX(${tempPosition}px)` }], {
-			duration: 200,
+			duration: 500,
 			fill: 'forwards',
 		});
 	}
 	function handleRemoveAnimation(e) {
 		let thisElement = e.target;
-		while (!thisElement.classList.contains('pick')) {
+		while (!thisElement.classList.contains('tab')) {
 			thisElement = thisElement.parentNode;
 		}
 		lineRef.current.animate([{ transform: `translateX(${linePosition}px)` }], {
-			duration: 200,
+			duration: 500,
 			fill: 'forwards',
 		});
 	}
 	function handleChangeView(e) {
 		let thisElement = e.target;
-		while (!thisElement.classList.contains('pick')) {
+		while (!thisElement.classList.contains('tab')) {
 			thisElement = thisElement.parentNode;
 		}
 		const tempPosition = thisElement.offsetLeft - lineRef.current.offsetLeft;
@@ -59,23 +85,36 @@ function Profile() {
 			}
 		});
 	}
+
 	if (!id.user.startsWith('@')) return <Navigate to="/404" />;
 	return (
 		<div className={cx('wrapper')}>
 			<div className={cx('info-container')}>
 				<div className={cx('info-header')}>
 					<span className={cx('user-avatar')}>
-						<Img
-							src={user.avatar}
-							style={{ width: '100%', borderRadius: '50%', height: '100%' }}
-						/>
+						<Img src={user.avatar} className={cx('img-sizing')} />
 					</span>
 					<div className={cx('basic-info')}>
 						<h2 className={cx('user-username')}>{user.nickname}</h2>
 						<h3
 							className={cx('user-name')}
 						>{`${user.first_name} ${user.last_name}`}</h3>
-						<div className={cx('follow-button')}>Follow</div>
+						{isMe ? (
+							<div className={cx('edit-button')} onClick={() => setIsEdit(true)}>
+								<span>
+									<FontAwesomeIcon icon={faPenToSquare} />
+								</span>
+								<span className={cx('edit-content')}>Edit profile</span>
+							</div>
+						) : (
+							<div
+								className={cx('follow-button', {
+									'is-followed': user.is_followed,
+								})}
+							>
+								{user.is_followed ? 'Following' : 'Follow'}
+							</div>
+						)}
 					</div>
 				</div>
 				<div className={cx('info-description')}>
@@ -102,11 +141,11 @@ function Profile() {
 						<div
 							id="videos"
 							ref={(e) => (viewRef.current[viewIndex++] = e)}
-							className={cx('pick', 'view-content', {
+							className={cx('tab', 'view-content', {
 								active: view,
 							})}
-							onMouseOver={(e) => handleChangeLine(e)}
-							onMouseOut={(e) => handleRemoveAnimation(e)}
+							onMouseEnter={(e) => handleChangeLine(e)}
+							onMouseLeave={(e) => handleRemoveAnimation(e)}
 							onClick={(e) => handleChangeView(e)}
 						>
 							<span>Videos</span>
@@ -114,11 +153,11 @@ function Profile() {
 						<div
 							id="liked"
 							ref={(e) => (viewRef.current[viewIndex++] = e)}
-							className={cx('pick', 'view-content', {
+							className={cx('tab', 'view-content', {
 								active: !view,
 							})}
-							onMouseOver={(e) => handleChangeLine(e)}
-							onMouseOut={(e) => handleRemoveAnimation(e)}
+							onMouseEnter={(e) => handleChangeLine(e)}
+							onMouseLeave={(e) => handleRemoveAnimation(e)}
 							onClick={(e) => handleChangeView(e)}
 						>
 							<span>
@@ -129,8 +168,11 @@ function Profile() {
 					</div>
 					<div ref={lineRef} className={cx('view-line')}></div>
 				</div>
-				<div className={cx('Videos-container')}></div>
+				<div className={cx('videos-container')}>
+					{view ? <MyVids vid={user.videos} /> : <MyLikedVids id={user.id} />}
+				</div>
 			</div>
+			{isEdit ? <EditProfileModal action={editValue} thisUser={user} /> : ''}
 		</div>
 	);
 }

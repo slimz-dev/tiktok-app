@@ -1,0 +1,49 @@
+.wrapper {
+	height: 100vh;
+}
+
+.video-info {
+	padding: 24px;
+	overflow: scroll;
+	height: 92vh;
+}
+
+.icon {
+	height: 20px;
+}
+
+.liked {
+	color: var(--primary);
+}
+
+.input-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 8vh;
+	width: 100%;
+	padding: 0px 24px;
+	border-top: 1px solid rgba(22, 24, 35, 0.2);
+	.input {
+		padding: 10px;
+		width: 86%;
+		border-radius: 5px;
+		background: rgb(22 24 35 / 6%);
+		caret-color: var(--primary);
+		&:focus {
+			border: 1px solid rgb(22 24 35 / 20%);
+		}
+	}
+	.post-button {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: var(--primary);
+		font-weight: 600;
+		height: 100%;
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}
