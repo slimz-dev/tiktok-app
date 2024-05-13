@@ -45,7 +45,7 @@ function FormUpload() {
 				};
 				const result = await uploadVid(data);
 				if (result === 'successfully uploaded') {
-					file.toasthandle('Video đã được upload thành công !');
+					file.toastHandle('Video đã được upload thành công !');
 					setTimeout(() => {
 						handleCancel();
 					}, 1000);

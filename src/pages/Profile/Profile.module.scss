@@ -1,6 +1,19 @@
+:root {
+	--border-color: rgb(22 24 35 / 12%);
+	--edit-border-color: rgb(208, 209, 211);
+	--edit-background-color: rgb(248, 248, 248);
+}
+
+[data-theme='dark'] {
+	--border-color: white;
+	--edit-border-color: rgb(35 33 33);
+	--edit-background-color: rgb(35 33 33);
+}
+
 .wrapper {
 	margin-top: 30px;
 	width: 100%;
+	min-height: calc(100vh - (var(--default-header-height) + 30px));
 }
 
 .info-container {
@@ -26,15 +39,17 @@
 		margin-left: 10px;
 		.user-username {
 			font-size: 2em;
+			color: var(--default-text-color);
 		}
 		.user-name {
 			margin-bottom: 10px;
 			font-size: 1.2em;
 			font-weight: 500;
+			color: var(--default-text-color);
 		}
 		.follow-button {
 			background-color: var(--primary);
-			color: white;
+			color: var(--default-text-color);
 			padding: 8px 80px;
 			border-radius: 5px;
 			text-align: center;
@@ -47,14 +62,15 @@
 }
 
 .edit-button {
-	border: 1px solid rgb(22 24 35 / 12%);
+	border: 1px solid var(--border-color);
 	padding: 8px 24px;
 	width: fit-content;
 	font-weight: 600;
+	color: var(--default-text-color);
 	&:hover {
 		cursor: pointer;
-		border-color: rgb(208, 209, 211);
-		background-color: rgb(248, 248, 248);
+		border-color: var(--edit-border-color);
+		background-color: var(--edit-background-color);
 	}
 }
 
@@ -72,21 +88,22 @@
 	.info-influent {
 		display: flex;
 		max-width: 350px;
-
 		.influent-container {
 			margin-right: 14px;
+			color: var(--default-text-color);
 			.influent-number {
 				font-weight: 700;
 				font-size: 1.2em;
 				margin-right: 5px;
 			}
 			.influent-type {
-				color: rgb(22 24 35 / 75%);
+				color: var(--default-text-color);
 			}
 		}
 	}
 	.user-description {
 		margin-top: 5px;
+		color: var(--default-text-color);
 	}
 }
 
@@ -111,11 +128,11 @@
 }
 
 .active {
-	color: black;
+	color: var(--default-text-color);
 	font-weight: 600;
 }
 .view-line {
 	width: 120px;
 	height: 2px;
-	background-color: black;
+	background-color: var(--default-text-color);
 }

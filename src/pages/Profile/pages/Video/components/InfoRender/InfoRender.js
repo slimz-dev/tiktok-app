@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 //css
 import useClassName from '~/hooks/useClassName';
@@ -9,11 +9,16 @@ import CommentRender from '../commentRender';
 import InfoHeader from './components/InfoHeader';
 import InfoContent from './components/InfoContent';
 import { postComment } from '~/services/Comments/postCommentService';
+import { closeModalContext } from '~/context/CloseLoginModalProvider';
+import AuthModal from '~/components/AuthModal';
+import { UserContext } from '~/context/UserProvider';
 
 // in your react component
 
 function InfoRender({ thisInfo, thisComment }) {
 	const [view, setView] = useState(true);
+	const logged = useContext(UserContext);
+	const modalHandler = useContext(closeModalContext);
 	const [commentData, setCommentData] = useState([]);
 	const inputRef = useRef();
 	const cx = useClassName(styles);
@@ -22,14 +27,19 @@ function InfoRender({ thisInfo, thisComment }) {
 	}, [thisComment]);
 	function handlePostComment() {
 		const comment = inputRef.current.value;
-		if (comment) {
-			const postingComment = async () => {
-				const result = await postComment(thisInfo.uuid, comment);
-				setCommentData((prev) => {
-					return [result, ...thisComment];
-				});
-			};
-			postingComment();
+		if (logged.loggedIn) {
+			if (comment) {
+				const postingComment = async () => {
+					const result = await postComment(thisInfo.uuid, comment);
+					setCommentData((prev) => {
+						inputRef.current.value = '';
+						return [result, ...thisComment];
+					});
+				};
+				postingComment();
+			}
+		} else {
+			modalHandler.handleOpen();
 		}
 	}
 
@@ -39,7 +49,11 @@ function InfoRender({ thisInfo, thisComment }) {
 				<InfoHeader thisInfo={thisInfo} />
 				<div className={cx('content')}>
 					<InfoContent thisInfo={thisInfo} view={view} />
-					{view && thisComment ? <CommentRender data={commentData} /> : ''}
+					{view && thisComment ? (
+						<CommentRender data={commentData} commentHandler={setCommentData} />
+					) : (
+						''
+					)}
 				</div>
 			</div>
 			<div className={cx('input-container')}>
@@ -48,6 +62,7 @@ function InfoRender({ thisInfo, thisComment }) {
 					Post
 				</div>
 			</div>
+			{modalHandler.isOpen ? <AuthModal /> : ''}
 		</div>
 	);
 }

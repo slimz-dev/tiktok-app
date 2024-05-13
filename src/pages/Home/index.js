@@ -8,6 +8,7 @@ import Video from './component/Video';
 const cx = classNames.bind(styles);
 
 function Home() {
+	const [myInfo, setMyInfo] = useState({});
 	const [vid, setVid] = useState([]);
 	const [page, setPage] = useState(1);
 	const data = {
@@ -18,6 +19,7 @@ function Home() {
 		action: {
 			setVid,
 		},
+		myInfo,
 	};
 	useEffect(() => {
 		const fetchVideo = async () => {

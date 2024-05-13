@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import useClassName from '~/hooks/useClassName';
 import { Link } from 'react-router-dom';
 //FontAwesome
@@ -8,6 +8,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 //Component
 import Img from '~/components/Img';
+import AuthModal from '~/components/AuthModal';
 
 //css
 import styles from './InfoHeader.module.scss';
@@ -15,32 +16,73 @@ import styles from './InfoHeader.module.scss';
 //api
 import { handleFollow } from '~/services/Follow/followService';
 import { handleLike } from '~/services/Likes/likeService';
+import { logged } from '~/services/Auth/loggedService';
+import { deleteVid } from '~/services/Videos/deleteVideoService';
+
+//context
+import { closeModalContext } from '~/context/CloseLoginModalProvider';
+import { UserContext } from '~/context/UserProvider';
 
 function InfoHeader({ thisInfo }) {
 	const cx = useClassName(styles);
+	const modalHandler = useContext(closeModalContext);
+	const userLog = useContext(UserContext);
+	const [isMe, setIsMe] = useState(false);
 	const [isFollowed, setIsFollowed] = useState(thisInfo.user.is_followed);
 	const [isLiked, setIsLiked] = useState(thisInfo.is_liked);
 	const [likedNum, setLikedNum] = useState(thisInfo.likes_count);
 
-	function handleChangeFollow() {
-		const followHandler = async () => {
-			await handleFollow(thisInfo.user.id, thisInfo.user.is_followed);
-			await setIsFollowed(!isFollowed);
+	useEffect(() => {
+		const getMe = async () => {
+			if (userLog.loggedIn) {
+				const result = await logged();
+				if (result.data.id === thisInfo.user.id) {
+					setIsMe(true);
+				}
+			} else {
+				modalHandler.handleOpen();
+			}
 		};
-		followHandler();
+
+		getMe();
+	}, []);
+
+	function handleDeleteVideo() {
+		const deleteVideo = async () => {
+			const result = await deleteVid(thisInfo.id);
+			if (!result) {
+				window.history.go(-1);
+			}
+		};
+		deleteVideo();
+	}
+	function handleChangeFollow() {
+		if (userLog.loggedIn) {
+			const followHandler = async () => {
+				await handleFollow(thisInfo.user.id, thisInfo.user.is_followed);
+				await setIsFollowed(!isFollowed);
+			};
+			followHandler();
+		} else {
+			modalHandler.handleOpen();
+		}
 	}
 
 	function handleLikeVid() {
-		const likeHandler = async () => {
-			await handleLike(thisInfo.id);
-			setIsLiked(!isLiked);
-			if (isLiked) {
-				setLikedNum(likedNum - 1);
-			} else {
-				setLikedNum(likedNum + 1);
-			}
-		};
-		likeHandler();
+		if (userLog.loggedIn) {
+			const likeHandler = async () => {
+				await handleLike(thisInfo.id);
+				setIsLiked(!isLiked);
+				if (isLiked) {
+					setLikedNum(likedNum - 1);
+				} else {
+					setLikedNum(likedNum + 1);
+				}
+			};
+			likeHandler();
+		} else {
+			modalHandler.handleOpen();
+		}
 	}
 	return (
 		<div className={cx('video-header')}>
@@ -72,14 +114,20 @@ function InfoHeader({ thisInfo }) {
 							</div>
 						</div>
 					</div>
-					<div
-						className={cx('follow-button', {
-							followed: isFollowed,
-						})}
-						onClick={handleChangeFollow}
-					>
-						{isFollowed ? 'Following' : 'Follow'}
-					</div>
+					{isMe ? (
+						<div className={cx('follow-button')} onClick={handleDeleteVideo}>
+							Delete Video
+						</div>
+					) : (
+						<div
+							className={cx('follow-button', {
+								followed: isFollowed,
+							})}
+							onClick={handleChangeFollow}
+						>
+							{isFollowed ? 'Following' : 'Follow'}
+						</div>
+					)}
 				</div>
 				<div className={cx('video-description')}>{thisInfo.description}</div>
 				<div className={cx('music')}>
@@ -112,6 +160,7 @@ function InfoHeader({ thisInfo }) {
 					<span className={cx('num-wrapper')}>{thisInfo.shares_count}</span>
 				</div>
 			</div>
+			{modalHandler.isOpen ? <AuthModal /> : ''}
 		</div>
 	);
 }

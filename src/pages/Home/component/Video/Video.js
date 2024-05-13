@@ -17,9 +17,11 @@ import { closeModalContext } from '~/context/CloseLoginModalProvider';
 import { handleFollow } from '~/services/Follow/followService';
 import { Link } from 'react-router-dom';
 import config from '~/config';
+import VideoRender from '~/components/Source/Source';
+import { logged } from '~/services/Auth/loggedService';
 const cx = classNames.bind(styles);
 function Video({ arrayList }) {
-	const [errorVid, setErrorVid] = useState([]);
+	const [myId, setMyId] = useState('');
 	const user = useContext(UserContext);
 	const loginModalHandler = useContext(closeModalContext);
 	const vidRef = useRef([]);
@@ -42,18 +44,27 @@ function Video({ arrayList }) {
 				});
 			}
 		});
+		if (user.loggedIn) {
+			const getMe = async () => {
+				const result = await logged();
+				setMyId(result.data.id);
+			};
+
+			getMe();
+		}
 	}, []);
 	function handleAutoPlay(inView, entry) {
 		const currentVideo = entry.target.firstChild.id;
 		if (inView) {
-			if (!errorVid.includes(vidRef.current[currentVideo].id)) {
+			if (vidRef.current[currentVideo]) {
 				vidRef.current[currentVideo].play();
 			}
 		} else {
-			vidRef.current[currentVideo].pause();
+			if (vidRef.current[currentVideo] && vidRef.current[currentVideo]?.currentTime > 0) {
+				vidRef.current[currentVideo].pause();
+			}
 		}
 	}
-
 	function handleLikeVideo(videoID) {
 		const fetchLike = async () => {
 			const result = await handleLike(videoID);
@@ -95,8 +106,9 @@ function Video({ arrayList }) {
 			loginModalHandler.handleOpen();
 		}
 	}
-	function handleError(vid) {
-		setErrorVid((prev) => [...prev, vid.toString()]);
+
+	function handleError(id) {
+		console.log('error from', id);
 	}
 
 	return (
@@ -149,21 +161,28 @@ function Video({ arrayList }) {
 											</div>
 										)}
 									</div>
-									<button
-										className={cx('follow-button', {
-											followed: item.user.is_followed,
-										})}
-										onClick={() => {
-											handleFollowUser(item.user_id, item.user.is_followed);
-										}}
-									>
-										{item.user.is_followed ? 'Following' : 'Follow'}
-									</button>
+									{!(myId === item.user.id) ? (
+										<button
+											className={cx('follow-button', {
+												followed: item.user.is_followed,
+											})}
+											onClick={() => {
+												handleFollowUser(
+													item.user_id,
+													item.user.is_followed
+												);
+											}}
+										>
+											{item.user.is_followed ? 'Following' : 'Follow'}
+										</button>
+									) : (
+										''
+									)}
 								</div>
 								<div className={cx('content')}>
 									<div className={cx('video')}>
 										<Link to={`/@${item.user.nickname}/video/${item.id}`}>
-											<video
+											<VideoRender
 												id={item.id}
 												loop
 												muted
@@ -173,7 +192,7 @@ function Video({ arrayList }) {
 												onError={() => handleError(item.id)}
 											>
 												<source src={item.file_url} type="video/mp4" />
-											</video>
+											</VideoRender>
 										</Link>
 									</div>
 									<div className={cx('video-button')}>

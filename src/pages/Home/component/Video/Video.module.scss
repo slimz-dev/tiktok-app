@@ -33,6 +33,7 @@
 	.tiktok_id {
 		font-weight: bold;
 		font-size: 18px;
+		color: var(--default-text-color);
 		&:hover {
 			cursor: pointer;
 			text-decoration: underline;
@@ -116,7 +117,9 @@
 		&:hover {
 			cursor: pointer;
 		}
-
+		svg {
+			color: var(--default-text-color);
+		}
 		.number {
 			font-size: 14px;
 			margin-top: 4px;

@@ -1,19 +1,25 @@
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useClassName from '~/hooks/useClassName';
 import styles from './MyVids.module.scss';
 function MyVids({ vid }) {
 	const vidRef = useRef([]);
+	const [errorVids, setErrorVids] = useState([]);
 	const cx = useClassName(styles);
 	function handlePlayVideo(index) {
-		vidRef.current[index].play();
+		if (!errorVids.includes(index)) {
+			vidRef.current[index].play();
+		}
 	}
 	function handlePauseVideo(index) {
-		if (vidRef.current[index] !== null) {
+		if (vidRef.current[index] !== null && !errorVids.includes(index)) {
 			vidRef.current[index].pause();
 		}
+	}
+	function handleError(index) {
+		setErrorVids((prev) => [...prev, index]);
 	}
 	return (
 		<div className={cx('wrapper')}>
@@ -31,6 +37,7 @@ function MyVids({ vid }) {
 								>
 									<div className={cx('video-content')}>
 										<video
+											onError={() => handleError(index)}
 											className={cx('video')}
 											ref={(e) => (vidRef.current[index] = e)}
 											muted={true}

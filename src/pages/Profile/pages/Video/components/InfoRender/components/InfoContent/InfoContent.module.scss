@@ -1,3 +1,15 @@
+:root {
+	--title-text: rgb(22 24 35 / 60%);
+	--active: black;
+	--sep-line: rgb(22 24 35 / 12%);
+}
+
+[data-theme='dark'] {
+	--title-text: var(--default-text-color);
+	--active: var(--primary);
+	--sep-line: #5e5e5e;
+}
+
 .content-header {
 	display: flex;
 }
@@ -8,7 +20,7 @@
 	width: 50%;
 	text-align: center;
 	font-size: 14px;
-	color: rgb(22 24 35 / 60%);
+	color: var(--title-text);
 	font-weight: 700;
 }
 .content-header-wrapper {
@@ -20,12 +32,12 @@
 
 .line {
 	width: 100%;
-	background: black;
+	background: var(--default-text-color);
 	height: 2px;
 	border-radius: 5px;
 }
 .active {
-	color: black;
+	color: var(--active);
 }
 .title-name {
 	height: 24px;
@@ -34,6 +46,7 @@
 	position: absolute;
 	height: 1px;
 	width: calc(100% + 48px);
-	background: rgb(22 24 35 / 12%);
+
+	background: var(--sep-line);
 	margin-left: -24px;
 }

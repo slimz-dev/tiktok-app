@@ -1,10 +1,21 @@
+:root {
+	--input-bg: rgb(22 24 35 / 6%);
+	--input-border-top: rgba(22, 24, 35, 0.2);
+}
+
+[data-theme='dark'] {
+	--input-bg: rgb(211 210 210);
+	--input-border-top: #5b5c60;
+}
+
 .wrapper {
 	height: 100vh;
+	background-color: var(--default-background-color);
 }
 
 .video-info {
 	padding: 24px;
-	overflow: scroll;
+	overflow-y: scroll;
 	height: 92vh;
 }
 
@@ -23,12 +34,12 @@
 	height: 8vh;
 	width: 100%;
 	padding: 0px 24px;
-	border-top: 1px solid rgba(22, 24, 35, 0.2);
+	border-top: 1px solid var(--input-border-top);
 	.input {
 		padding: 10px;
 		width: 86%;
 		border-radius: 5px;
-		background: rgb(22 24 35 / 6%);
+		background: var(--input-bg);
 		caret-color: var(--primary);
 		&:focus {
 			border: 1px solid rgb(22 24 35 / 20%);

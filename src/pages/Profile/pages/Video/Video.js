@@ -22,7 +22,6 @@ function Video() {
 		const renderVideo = async () => {
 			const videoId = id.videoId;
 			const result = await getVideo(videoId);
-			console.log(result);
 			setVideo(result);
 		};
 		const renderComment = async () => {

@@ -1,5 +1,13 @@
+:root {
+	--header-bg: rgb(22 24 35 / 3%);
+}
+
+[data-theme='dark'] {
+	--header-bg: #2f2f2f;
+}
+
 .video-header-wrapper {
-	background: rgb(22 24 35 / 3%);
+	background: var(--header-bg);
 	padding: 16px;
 	display: flex;
 	flex-direction: column;
@@ -29,6 +37,7 @@
 .video-author-username {
 	font-size: 18px;
 	font-weight: 500;
+	color: var(--default-text-color);
 	&:hover {
 		cursor: pointer;
 		text-decoration: underline;
@@ -37,17 +46,23 @@
 
 .video-author-name {
 	font-size: 14px;
+	color: var(--default-text-color);
 }
 
 .video-date {
 	margin-left: 6px;
+	color: var(--default-text-color);
 }
 
 .video-description {
 	margin-top: 10px;
 	margin-bottom: 8px;
+	color: var(--default-text-color);
 }
 
+.music {
+	color: var(--default-text-color);
+}
 .video-action {
 	display: flex;
 	flex-direction: row;
@@ -55,6 +70,7 @@
 	width: 50%;
 	margin-top: 20px;
 	margin-bottom: 20px;
+	color: var(--default-text-color);
 }
 
 .action-container {

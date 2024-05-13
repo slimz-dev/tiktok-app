@@ -27,7 +27,7 @@ function Sidebar() {
 						<span className={cx('title')}>Dành cho bạn</span>
 					</NavLink>
 					<NavLink
-						to={config.routes.Following}
+						to={config.routes.Unknown}
 						className={({ isActive }) =>
 							cx('slot-container', {
 								active: isActive,

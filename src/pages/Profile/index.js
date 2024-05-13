@@ -1,18 +1,32 @@
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
-import Img from '~/components/Img';
 import config from '~/config';
 import useClassName from '~/hooks/useClassName';
-import { getUser } from '~/services/Users/getAnUserService';
-import { logged } from '~/services/Auth/loggedService';
+
+//components
+import Img from '~/components/Img';
 import MyLikedVids from './components/MyLikedVids/MyLikedVids';
 import MyVids from './components/MyVids/MyVids';
-import styles from './Profile.module.scss';
 import EditProfileModal from './components/EditProfileModal';
+import AuthModal from '~/components/AuthModal';
+
+//api
+import { getUser } from '~/services/Users/getAnUserService';
+import { logged } from '~/services/Auth/loggedService';
+import { handleFollow } from '~/services/Follow/followService';
+
+//css
+import styles from './Profile.module.scss';
+
+//context
+import { UserContext } from '~/context/UserProvider';
+import { closeModalContext } from '~/context/CloseLoginModalProvider';
 function Profile() {
+	const modalHandler = useContext(closeModalContext);
+	const userLog = useContext(UserContext);
 	const navigate = useNavigate();
 	const [linePosition, setLinePosition] = useState(0);
 	const [view, setView] = useState(true);
@@ -24,7 +38,7 @@ function Profile() {
 	const [user, setUser] = useState({});
 	const [isMe, setIsMe] = useState(false);
 	const [isEdit, setIsEdit] = useState(false);
-
+	const [isFollowed, setIsFollowed] = useState(false);
 	const editValue = {
 		isEdit,
 		setIsEdit,
@@ -32,14 +46,20 @@ function Profile() {
 	useEffect(() => {
 		const fetchUser = async () => {
 			const result = await getUser(id.user);
-			const me = await logged();
+			let me = {};
+			if (userLog.loggedIn) {
+				me = await logged();
+			}
 			if (result !== null) {
 				setUser(() => {
-					if (me.data.id === result.id) {
-						setIsMe(true);
-					} else {
-						setIsMe(false);
+					if (userLog.loggedIn) {
+						if (me.data.id === result.id) {
+							setIsMe(true);
+						} else {
+							setIsMe(false);
+						}
 					}
+					setIsFollowed(result.is_followed);
 					return result;
 				});
 			} else {
@@ -49,6 +69,19 @@ function Profile() {
 		fetchUser();
 	}, [id]);
 
+	function handleFollowUser(userId, isFollowed) {
+		const followUser = async () => {
+			const result = await handleFollow(userId, isFollowed);
+			if (result) {
+				setIsFollowed((prev) => !prev);
+			}
+		};
+		if (userLog.loggedIn) {
+			followUser();
+		} else {
+			modalHandler.handleOpen();
+		}
+	}
 	function handleChangeLine(e) {
 		let thisElement = e.target;
 		while (!thisElement.classList.contains('tab')) {
@@ -109,10 +142,11 @@ function Profile() {
 						) : (
 							<div
 								className={cx('follow-button', {
-									'is-followed': user.is_followed,
+									'is-followed': isFollowed,
 								})}
+								onClick={() => handleFollowUser(user.id, user.is_followed)}
 							>
-								{user.is_followed ? 'Following' : 'Follow'}
+								{isFollowed ? 'Following' : 'Follow'}
 							</div>
 						)}
 					</div>
@@ -173,6 +207,7 @@ function Profile() {
 				</div>
 			</div>
 			{isEdit ? <EditProfileModal action={editValue} thisUser={user} /> : ''}
+			{modalHandler.isOpen ? <AuthModal /> : ''}
 		</div>
 	);
 }
